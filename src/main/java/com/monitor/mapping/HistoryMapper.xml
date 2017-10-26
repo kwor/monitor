@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.HistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.TbInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stationId" property="stationid" jdbcType="VARCHAR" />
+    <result column="inventersn" property="inventersn" jdbcType="VARCHAR" />
+    <result column="idesc" property="idesc" jdbcType="VARCHAR" />
+    <result column="power" property="power" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="eday" property="eday" jdbcType="VARCHAR" />
+    <result column="etotal" property="etotal" jdbcType="VARCHAR" />
+    <result column="errormsg" property="errormsg" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stationId, inventersn, idesc,power,status,eday,etotal,errormsg,addtime
+  </sql>
+  
+ <!-- 根据设备ID查询所有 --> 
+  <select id="selectByequipment_id" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_info
+    where inventersn = #{inventersn,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据ID查询最新数据 -->
+    <select id="selectByequipment_idNum" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_info
+    where inventersn = #{inventersn,jdbcType=VARCHAR} order by addtime limit #{offset},#{limit}
+  </select>
+  
+  <!-- 根据日期查询数据 -->
+    <select id="selectByEquipment_idTime" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_info
+    where addtime &gt;=#{time1} and addtime &lt;=#{time2}
+  </select>
+  
+	<!-- 根据日期查询单个设备 -->
+	<select id="selectByEquipment_idOneTime" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_info
+    where inventersn=#{inventersn} and addtime &gt;=#{time1} and addtime &lt;=#{time2} 
+  </select>
+	
+	
+	<!-- 查询所有数据 -->
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+	select 
+	<include refid="Base_Column_List" />
+	from tb_info
+	</select>
+  
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_history
+    where id = #{id,jdbcType=INTEGER}
+  </delete> 
+  
+  <insert id="insert" parameterType="com.monitor.pojo.TbInfo" >
+    insert into tb_history (id, equipment_id, addtime, 
+      info)
+    values (#{id,jdbcType=INTEGER}, #{equipmentId,jdbcType=VARCHAR}, #{addtime,jdbcType=VARCHAR}, 
+      #{info,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.TbInfo" >
+    insert into tb_history
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="equipmentId != null" >
+        equidment_id,
+      </if>
+      <if test="addtime != null" >
+        addtime,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="equipmentId != null" >
+        #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.TbInfo" >
+    update tb_history
+    <set >
+      <if test="equipmentId != null" >
+        equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        addtime = #{addtime,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.TbInfo" >
+    update tb_history
+    set equipment_id = #{equipmentId,jdbcType=VARCHAR},
+      addtime = #{addtime,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
