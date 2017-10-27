@@ -31,6 +31,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.monitor.pojo.History;
 import com.monitor.pojo.TbInfo;
 import com.monitor.service.IHistoryService;
+import com.monitor.util.RequestJson;
 
 @Controller
 @RequestMapping("/")
@@ -81,7 +82,14 @@ public class HistoryController {
 		// 读取请求内容
  
     	 int totalBytes = request.getContentLength();
-	        System.out.println("当前数据总长度:" + totalBytes);
+	      System.out.println("当前数据总长度:" + totalBytes);
+	  	try {
+			System.out.println(new RequestJson().getRequestJsonString(request));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+	 
 		
         File newfile = new File("testnew.txt");
     	FileOutputStream fos = null;
@@ -94,12 +102,14 @@ public class HistoryController {
     	OutputStreamWriter osw = new OutputStreamWriter(fos);
     	BufferedWriter bw = new BufferedWriter(osw);
     	try {
-    	    
-   
+    
+    		/*
     		
-    		 /*
+    		
     	    Map map=request.getParameterMap();  
+    	   
     	    Set keSet=map.entrySet();
+    	    
      	    System.out.println("size"+keSet.size());
      	    
      	    
