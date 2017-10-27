@@ -90,6 +90,7 @@ public class HistoryController {
     		try {
     			
     			String str=new RequestJson().getRequestJsonString(request);
+    			System.out.println(str);
     			XmStationField field = null;
     			field = gson.fromJson(str, XmStationField.class);
     			System.out.println("xxxx"+field.getX1bd());
