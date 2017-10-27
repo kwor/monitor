@@ -28,9 +28,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
+import com.google.gson.Gson;
+import com.monitor.dao.GdStationField;
+import com.monitor.dao.XmStationField;
 import com.monitor.pojo.History;
 import com.monitor.pojo.TbInfo;
 import com.monitor.service.IHistoryService;
+import com.monitor.service.ITbInfoService;
 import com.monitor.util.RequestJson;
 
 @Controller
@@ -39,6 +43,8 @@ public class HistoryController {
 
     @Resource
     private IHistoryService historyService;
+    @Resource
+	private ITbInfoService gdErrorService;
     @ResponseBody
 //根据ID查询所有数据
     @RequestMapping(value="/SNCode/{inventersn}", method = {RequestMethod.GET})
@@ -77,78 +83,37 @@ public class HistoryController {
     @RequestMapping(value="/getinfo",method= {RequestMethod.POST},consumes = "application/json")
    
     public String getinfo(HttpServletRequest request) {
-    	
-
-		// 读取请求内容
- 
-    	 int totalBytes = request.getContentLength();
-	      System.out.println("当前数据总长度:" + totalBytes);
-	  	try {
-			System.out.println(new RequestJson().getRequestJsonString(request));
-		} catch (IOException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-	 
-		
-        File newfile = new File("testnew.txt");
-    	FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(newfile);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    	OutputStreamWriter osw = new OutputStreamWriter(fos);
-    	BufferedWriter bw = new BufferedWriter(osw);
-    	try {
-    
-    		/*
-    		
-    		
-    	    Map map=request.getParameterMap();  
-    	   
-    	    Set keSet=map.entrySet();
-    	    
-     	    System.out.println("size"+keSet.size());
-     	    
-     	    
-     	   
-    	    for(Iterator itr=keSet.iterator();itr.hasNext();){  
-
-    	        Map.Entry me=(Map.Entry)itr.next();  
-    	        Object ok=me.getKey();  
-    	        Object ov=me.getValue();  
-    	        String[] value=new String[1];  
-    	        
-    	        if(ov instanceof String[]){  
-    	            value=(String[])ov;  
-    	        }else{  
-    	            value[0]=ov.toString();  
-    	        }  
-    	  
-    	        for(int k=0;k<value.length;k++){  
-    	        	
-    	        	bw.write(ok+"="+value[k]);
-    	        	
-    	            System.out.println(ok+"="+value[k]);  
-    	            
-    	            
-    	            
-    	        }  
-    	      }  
-    		//*/
-    		
-    	
-    	System.out.println("done");
-    	bw.close();
-    	osw.close();
-    	fos.close();
-    	} catch (IOException e) {
-    	// TODO Auto-generated catch block
-    	e.printStackTrace();
+    	Gson gson = new Gson();
+    	//获取字节流长度
+    	int totalBytes = request.getContentLength();
+    	if(totalBytes>0) {
+    		try {
+    			
+    			String str=new RequestJson().getRequestJsonString(request);
+    			XmStationField field = null;
+    			field = gson.fromJson(str, XmStationField.class);
+    			TbInfo gd=new TbInfo();
+    			gd.setAddtime(field.getZd());
+    			gd.setStationid(field.getG());
+    			gd.setInventersn(field.getZa());
+    			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
+    			gd.setPower("0");
+    			 
+    			gd.setStatus("Offline");
+    			
+    			gd.setEday(field.getX1bd());
+    			gd.setEtotal(field.getX1bc());
+    			gd.setErrormsg(field.getX1fs());
+    			//错误信息反馈
+    			gdErrorService.insertError(gd);
+    			
+    		} catch (IOException e2) {
+    			// TODO Auto-generated catch block
+    			e2.printStackTrace();
+    		}
+    	 
     	}
-    	
+	  
 
 
         return "returnr";
