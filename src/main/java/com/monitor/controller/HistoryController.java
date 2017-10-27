@@ -30,10 +30,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.monitor.dao.GdStationField;
 import com.monitor.dao.XmStationField;
+import com.monitor.pojo.GdStationError;
 import com.monitor.pojo.History;
 import com.monitor.pojo.TbInfo;
 import com.monitor.service.IHistoryService;
@@ -98,23 +100,36 @@ public class HistoryController {
     			XmStationField field = null;
     			 
     			JsonElement jsonstr=parser.parse(str);
-    			field = gson.fromJson(jsonstr, XmStationField.class);
-    			System.out.println("xxxx"+field.getX1bd());
-    			System.out.println("aaaa"+field.getZa());
     			
-    			TbInfo gd=new TbInfo();
-    			gd.setAddtime(field.getZd());
-    			gd.setStationid(field.getG());
-    			gd.setInventersn(field.getZa());
-    			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
-    			gd.setPower("0W");
-    			gd.setStatus("Offline");
-    			gd.setEday(field.getX1bd());
-    			gd.setEtotal(field.getX1bc());
-    			gd.setErrormsg(field.getX1fs());
-    			//错误信息反馈
-    			gdErrorService.insertError(gd);
-    			
+    			JsonArray jsonArray2=null;
+    			   if(jsonstr.isJsonArray()) {
+    				   jsonArray2=jsonstr.getAsJsonArray();
+    			   }
+    			   Iterator it2=jsonArray2.iterator();
+    			   while (it2.hasNext()) {
+    				   JsonElement e2 = (JsonElement) it2.next();
+    	    			field = gson.fromJson(e2, XmStationField.class);
+
+    					System.out.println("info1:"+field.getX1bd());
+    	    			System.out.println("info2:"+field.getZa());
+    	    			
+    	    			TbInfo gd=new TbInfo();
+    	    			gd.setAddtime(field.getZd());
+    	    			gd.setStationid(field.getG());
+    	    			gd.setInventersn(field.getZa());
+    	    			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
+    	    			gd.setPower("0W");
+    	    			gd.setStatus("Offline");
+    	    			gd.setEday(field.getX1bd());
+    	    			gd.setEtotal(field.getX1bc());
+    	    			gd.setErrormsg(field.getX1fs());
+    	    			//错误信息反馈
+    	    			gdErrorService.insertError(gd);
+
+    				   
+    				   
+    			   }
+    	    			
     		} catch (IOException e2) {
     			// TODO Auto-generated catch block
     			e2.printStackTrace();
