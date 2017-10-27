@@ -22,11 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import com.alibaba.fastjson.JSONArray;
 import com.monitor.pojo.History;
 import com.monitor.pojo.TbInfo;
 import com.monitor.service.IHistoryService;
@@ -72,8 +73,16 @@ public class HistoryController {
    
     
  //获取逆变器数据
-    @RequestMapping(value="/getinfo",method= {RequestMethod.POST})
+    @RequestMapping(value="/getinfo",method= {RequestMethod.POST},consumes = "application/json")
+   
     public String getinfo(HttpServletRequest request) {
+    	
+
+		// 读取请求内容
+ 
+    	 int totalBytes = request.getContentLength();
+	        System.out.println("当前数据总长度:" + totalBytes);
+		
         File newfile = new File("testnew.txt");
     	FileOutputStream fos = null;
 		try {
@@ -85,23 +94,23 @@ public class HistoryController {
     	OutputStreamWriter osw = new OutputStreamWriter(fos);
     	BufferedWriter bw = new BufferedWriter(osw);
     	try {
-    		/*
-    		Enumeration<?> enu=request.getParameterNames();  
-    		while(enu.hasMoreElements()){  
-    		String paraName=(String)enu.nextElement();  
-    		bw.write(paraName+"-");
-    		bw.write(request.getParameter(paraName)+"+++++++++++++++");
-    		System.out.println(paraName+": "+request.getParameter(paraName));  
-    		}
+    	    
+   
     		
-    		//*/
-    		Map map=request.getParameterMap();  
-    	    Set keSet=map.entrySet();  
+    		 /*
+    	    Map map=request.getParameterMap();  
+    	    Set keSet=map.entrySet();
+     	    System.out.println("size"+keSet.size());
+     	    
+     	    
+     	   
     	    for(Iterator itr=keSet.iterator();itr.hasNext();){  
+
     	        Map.Entry me=(Map.Entry)itr.next();  
     	        Object ok=me.getKey();  
     	        Object ov=me.getValue();  
     	        String[] value=new String[1];  
+    	        
     	        if(ov instanceof String[]){  
     	            value=(String[])ov;  
     	        }else{  
@@ -118,7 +127,7 @@ public class HistoryController {
     	            
     	        }  
     	      }  
-    		
+    		//*/
     		
     	
     	System.out.println("done");
@@ -130,8 +139,8 @@ public class HistoryController {
     	e.printStackTrace();
     	}
     	
-  
-        
+
+
         return "returnr";
     }
     
