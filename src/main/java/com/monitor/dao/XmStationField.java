@@ -2,6 +2,8 @@ package com.monitor.dao;
 
 import javax.persistence.Column;
 
+import com.google.gson.annotations.SerializedName;
+
 public class XmStationField {
 
 	public String getX1fv() {
@@ -324,29 +326,29 @@ public class XmStationField {
 		this.ah = ah;
 	}
 
-	@Column(name="1fv")
+	@SerializedName("1fv")
 	private String x1fv;
-	@Column(name="1fu")
+	@SerializedName("1fu")
 	private String x1fu;
-	@Column(name="1fx")
+	@SerializedName("1fx")
 	private String x1fx;
-	@Column(name="1fw")
+	@SerializedName("1fw")
 	private String x1fw;
-	@Column(name="1gg")
+	@SerializedName("1gg")
 	private String x1gg;
-	@Column(name="1j")
+	@SerializedName("1j")
 	private String x1j;
-	@Column(name="1df")
+	@SerializedName("1df")
 	private String x1df;
-	@Column(name="1l")
+	@SerializedName("1l")
 	private String x1l;
-	@Column(name="1k")
+	@SerializedName("1k")
 	private String x1k;
-	@Column(name="1b")
+	@SerializedName("1b")
 	private String x1b;
-	@Column(name="1a")
+	@SerializedName("1a")
 	private String x1a;
-	@Column(name="1c")
+	@SerializedName("1c")
 	private String x1c;
 	
 	private String ruleCode;
@@ -360,24 +362,24 @@ public class XmStationField {
 	//采集器sn
 	private String za;
 	
-	@Column(name="1ag")
+	@SerializedName("1ag")
 	private String x1ag;
-	@Column(name="1af")
+	@SerializedName("1af")
 	private String x1af;
-	@Column(name="1ao")
+	@SerializedName("1ao")
 	private String x1ao;
-	@Column(name="1ek")
+	@SerializedName("1ek")
 	private String x1ek;
-	@Column(name="1ai")
+	@SerializedName("1ai")
 	private String x1ai;
 	
  	private String zk;
  	
- 	@Column(name="1ah")
+ 	@SerializedName("1ah")
 	private String x1ah;
- 	@Column(name="1ak")
+ 	@SerializedName("1ak")
 	private String x1ak;
- 	@Column(name="1aj")
+ 	@SerializedName("1aj")
 	private String x1aj;
  	
 	private String zl;		
@@ -389,18 +391,18 @@ public class XmStationField {
 	private String e;		
 	private String aq;
 	//报警代码
-	@Column(name="1fs")
+	@SerializedName("1fs")
 	private String x1fs;
 	
-	@Column(name="1ft")
+	@SerializedName("1ft")
 	private String x1ft;
 	//当日发电量
-	@Column(name="1bd")
+	@SerializedName("1bd")  
 	private String x1bd;
 	
 	private String ap;
 	//累计发电量
-	@Column(name="1bc")
+	@SerializedName("1bc")
 	private String x1bc;
 	
 	private String ah;
