@@ -110,8 +110,8 @@ public class HistoryController {
     				   JsonElement e2 = (JsonElement) it2.next();
     	    			field = gson.fromJson(e2, XmStationField.class);
 
-    					System.out.println("info1:"+field.getX1bd());
-    	    			System.out.println("info2:"+field.getZa());
+    					
+    	    			 
     	    			
     	    			TbInfo gd=new TbInfo();
     	    			gd.setAddtime(field.getZd());
@@ -122,8 +122,26 @@ public class HistoryController {
     	    			gd.setStatus("Offline");
     	    			gd.setEday(field.getX1bd());
     	    			gd.setEtotal(field.getX1bc());
-    	    			gd.setErrormsg(field.getX1fs());
+    	    			
     	    			//错误信息反馈
+    	    			if(field.getX1fs()=="") {
+    	    				gd.setErrormsg("N/A");
+    	    			}else {
+    	    				gd.setErrormsg(field.getX1fs());
+    	    			}
+    	    			
+    	    			System.out.println("gd.getAddtime():"+gd.getAddtime());
+    	    			System.out.println("gd.getEday():"+gd.getEday());
+    	    			System.out.println("gd.getErrormsg():"+gd.getErrormsg());
+    	    			System.out.println("gd.getIdesc():"+gd.getIdesc());
+    	    			System.out.println("gd.getInventersn():"+gd.getInventersn());
+    	    			System.out.println("gd.getPower():"+gd.getPower());
+    	    			System.out.println("gd.getStationid():"+gd.getStationid());
+    	    			System.out.println("gd.getStatus():"+gd.getStatus());
+    	    			//
+    	    			System.out.println("gd.getId():"+gd.getId());
+    	    			
+    	    			
     	    			gdErrorService.insertError(gd);
 
     				   
