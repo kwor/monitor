@@ -1,7 +1,7 @@
 package com.monitor.pojo;
 
 public class GdSninfo {
-    private Integer id;
+    //private Integer id;
 
     private String username;
 
@@ -27,7 +27,7 @@ public class GdSninfo {
 
     @Override
 	public String toString() {
-		return "GdSninfo [id=" + id + ", username=" + username + ", stationid=" + stationid + ", stationname="
+		return "GdSninfo [ username=" + username + ", stationid=" + stationid + ", stationname="
 				+ stationname + ", stationPic=" + stationPic + ", currentpower=" + currentpower + ", capacity="
 				+ capacity + ", valueEdaytotal=" + valueEdaytotal + ", valueEtotal=" + valueEtotal + ", valueDayincome="
 				+ valueDayincome + ", valueTotalincome=" + valueTotalincome + "]";
@@ -38,11 +38,11 @@ public class GdSninfo {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GdSninfo(Integer id, String username, String stationid, String stationname, String stationPic,
+	public GdSninfo(String username, String stationid, String stationname, String stationPic,
 			String currentpower, String capacity, String valueEdaytotal, String valueEtotal, String valueDayincome,
 			String valueTotalincome) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.username = username;
 		this.stationid = stationid;
 		this.stationname = stationname;
@@ -55,14 +55,14 @@ public class GdSninfo {
 		this.valueTotalincome = valueTotalincome;
 	}
 
-	public Integer getId() {
+	/*public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
-
+    */
     public String getUsername() {
         return username;
     }

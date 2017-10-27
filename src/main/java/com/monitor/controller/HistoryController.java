@@ -92,12 +92,15 @@ public class HistoryController {
     			String str=new RequestJson().getRequestJsonString(request);
     			XmStationField field = null;
     			field = gson.fromJson(str, XmStationField.class);
+    			System.out.println("xxxx"+field.getX1bd());
+    			System.out.println("aaaa"+field.getZa());
+    			
     			TbInfo gd=new TbInfo();
     			gd.setAddtime(field.getZd());
     			gd.setStationid(field.getG());
     			gd.setInventersn(field.getZa());
     			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
-    			gd.setPower("0");
+    			gd.setPower("0W");
     			gd.setStatus("Offline");
     			gd.setEday(field.getX1bd());
     			gd.setEtotal(field.getX1bc());

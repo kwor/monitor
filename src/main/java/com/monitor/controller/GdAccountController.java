@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.json.Json;
@@ -57,49 +56,69 @@ public class GdAccountController {
 	public List<GdAccount> selectByGdAccount(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2){		
 		JsonParser parser = new JsonParser();  //创建json解析器
 		Gson gson = new Gson();
+		List<String> stationIdList = null;
+		// 1 先获取账户列表
 		List<GdAccount> accountlist= gdAccountService.selectByGdAccount(num1,num2);		
 		Iterator list = accountlist.iterator();
+		// 如果有账户信息，则先查出tb_gd_sninfo表中的 stationId,用于后面判断是插入还是更新
+		if(list.hasNext())
+		{
+			stationIdList = gdSninfoService.selectStationid();
+		}
+		// 循环账户列表
 		while (list.hasNext()) {
 			GdAccount gdaccount = (GdAccount) list.next();
 			//获取account表里的所有数据
 			String account = gdaccount.getAccount();
-		//通过account获取stationId的地址
-		 String url = "http://www.goodwe-power.com/mobile/GetMyPowerStationByUser?userName="+account;
-		 HttpURLConnection connection = null;		 		 		 			
-		 try {
-			 //通过get方式获取地址并获取stationId
-			 String jsoninfo=new HttpTool().sendPost("", url);
-			 //获取出Json格式，进行解析
-			 JsonElement el = parser.parse(jsoninfo);			 
-			 JsonArray jsonArray = null;
-			 if(el.isJsonArray()){
-			 jsonArray = el.getAsJsonArray();			 			
+		    //通过account获取stationId的地址
+		    String url = "http://www.goodwe-power.com/mobile/GetMyPowerStationByUser?userName="+account;
+		    HttpURLConnection connection = null;		 		 		 			
+		    try {
+				 //通过get方式获取地址并获取stationId
+				 String jsoninfo=new HttpTool().sendPost("", url);
+				 //获取出Json格式，进行解析
+				 JsonElement el = parser.parse(jsoninfo);			 
+				 JsonArray jsonArray = null;
+				 if(el.isJsonArray()){
+				 jsonArray = el.getAsJsonArray();			 			
 			 }			 
-			//遍历JsonArray对象
+			 //遍历JsonArray对象
 			 GdStationField field = null;
 			 Iterator it = jsonArray.iterator();
 			 while(it.hasNext()){
-			 JsonElement e = (JsonElement)it.next();			 			
-			 //JsonElement转换为JavaBean对象
-			 field = gson.fromJson(e, GdStationField.class);
-			 String stationid=field.getStationId();
-			 String userName=field.getUserName();
-			 String stationName=field.getStationName();
-			 String station_pic=field.getStation_pic();
-			 String currentPower=field.getCurrentPower();
-			 String capacity=field.getCapacity();
-			 String value_eDayTotal=field.getValue_eDayTotal();
-			 String value_eTotal=field.getValue_eTotal();
-			 String value_dayIncome=field.getValue_dayIncome();
-			 String value_totalIncome=field.getValue_totalIncome();
-			 //把stationid插入数据库
-			 gdSninfoService.insertSn(stationid,account,stationName,station_pic,currentPower,capacity,value_eDayTotal,value_eTotal,value_dayIncome,value_totalIncome);
-
+				 JsonElement e = (JsonElement)it.next();			 			
+				 //JsonElement转换为JavaBean对象
+				 field = gson.fromJson(e, GdStationField.class);	
+				 //fza 2017.10.27  
+				 GdSninfo snInfo = new GdSninfo(field.getUserName(),field.getStationId(), field.getStationName(), field.getStation_pic(),
+						 field.getCurrentPower(), field.getCapacity(), field.getValue_eDayTotal(), field.getValue_eTotal(), field.getValue_dayIncome(),
+						 field.getValue_totalIncome());
+				 //如果tb_gd_sninfo有数据
+				 if(stationIdList.size() > 0)
+				 {
+					 //判断如果存在执行更新操作，如果不存在执行插入操作
+					 if(stationIdList.contains(field.getStationId()))
+					 {
+						 //更新tb_gd_sninfo
+						 gdSninfoService.updateByStationId(snInfo);
+					 }
+					 else
+					 {
+						 //把stationid插入数据库
+						 gdSninfoService.insertSn(snInfo);
+					 }
+				 }
+				//如果tb_gd_sninfo没有有数据，直接插入
+				 else {
+					 //把stationid插入数据库
+					 gdSninfoService.insertSn(snInfo);
+				}
 			 }
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} 
+			catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}	

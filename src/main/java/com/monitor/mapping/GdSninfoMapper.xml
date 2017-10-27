@@ -23,8 +23,7 @@
   </sql>
   <!-- 查询stationid -->
   <select id="selectStationid" resultMap="map" parameterType="java.lang.String">
-  	select stationid from tb_gd_sninfo
-  
+  	select stationid from tb_gd_sninfo 
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,16 +31,17 @@
     from tb_gd_sninfo
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_gd_sninfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.monitor.pojo.GdSninfo" >
-    insert into tb_gd_sninfo (id, userName, stationId, 
+    insert into tb_gd_sninfo (userName, stationId, 
       stationName, station_pic, currentPower, 
       capacity, value_eDayTotal, value_eTotal, 
       value_dayIncome, value_totalIncome)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{stationid,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{stationid,jdbcType=VARCHAR}, 
       #{stationname,jdbcType=VARCHAR}, #{stationPic,jdbcType=VARCHAR}, #{currentpower,jdbcType=VARCHAR}, 
       #{capacity,jdbcType=VARCHAR}, #{valueEdaytotal,jdbcType=VARCHAR}, #{valueEtotal,jdbcType=VARCHAR}, 
       #{valueDayincome,jdbcType=VARCHAR}, #{valueTotalincome,jdbcType=VARCHAR})
@@ -174,5 +174,19 @@
       value_dayIncome = #{valueDayincome,jdbcType=VARCHAR},
       value_totalIncome = #{valueTotalincome,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByStationId" parameterType="com.monitor.pojo.GdSninfo" >
+    update tb_gd_sninfo
+    set userName = #{username,jdbcType=VARCHAR},
+      stationId = #{stationid,jdbcType=VARCHAR},
+      stationName = #{stationname,jdbcType=VARCHAR},
+      station_pic = #{stationPic,jdbcType=VARCHAR},
+      currentPower = #{currentpower,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      value_eDayTotal = #{valueEdaytotal,jdbcType=VARCHAR},
+      value_eTotal = #{valueEtotal,jdbcType=VARCHAR},
+      value_dayIncome = #{valueDayincome,jdbcType=VARCHAR},
+      value_totalIncome = #{valueTotalincome,jdbcType=VARCHAR}
+    where stationid = #{stationid,jdbcType=VARCHAR}
   </update>
 </mapper>
