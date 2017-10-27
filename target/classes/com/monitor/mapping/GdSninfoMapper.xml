@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.GdSninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.GdSninfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="stationId" property="stationid" jdbcType="VARCHAR" />
+    <result column="stationName" property="stationname" jdbcType="VARCHAR" />
+    <result column="station_pic" property="stationPic" jdbcType="VARCHAR" />
+    <result column="currentPower" property="currentpower" jdbcType="VARCHAR" />
+    <result column="capacity" property="capacity" jdbcType="VARCHAR" />
+    <result column="value_eDayTotal" property="valueEdaytotal" jdbcType="VARCHAR" />
+    <result column="value_eTotal" property="valueEtotal" jdbcType="VARCHAR" />
+    <result column="value_dayIncome" property="valueDayincome" jdbcType="VARCHAR" />
+    <result column="value_totalIncome" property="valueTotalincome" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap type="java.lang.String" id="map">
+  <result column="stationId" property="stationid" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, userName, stationId, stationName, station_pic, currentPower, capacity, value_eDayTotal, 
+    value_eTotal, value_dayIncome, value_totalIncome
+  </sql>
+  <!-- 查询stationid -->
+  <select id="selectStationid" resultMap="map" parameterType="java.lang.String">
+  	select stationid from tb_gd_sninfo 
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_gd_sninfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_gd_sninfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.monitor.pojo.GdSninfo" >
+    insert into tb_gd_sninfo (userName, stationId, 
+      stationName, station_pic, currentPower, 
+      capacity, value_eDayTotal, value_eTotal, 
+      value_dayIncome, value_totalIncome)
+    values (#{username,jdbcType=VARCHAR}, #{stationid,jdbcType=VARCHAR}, 
+      #{stationname,jdbcType=VARCHAR}, #{stationPic,jdbcType=VARCHAR}, #{currentpower,jdbcType=VARCHAR}, 
+      #{capacity,jdbcType=VARCHAR}, #{valueEdaytotal,jdbcType=VARCHAR}, #{valueEtotal,jdbcType=VARCHAR}, 
+      #{valueDayincome,jdbcType=VARCHAR}, #{valueTotalincome,jdbcType=VARCHAR})
+  </insert>
+    <!-- 把stationid插入数据库 -->
+  <insert id="insertSn" parameterType="java.lang.String" >
+    insert into tb_gd_sninfo (stationId,userName,stationName,station_pic,currentPower,capacity,value_eDayTotal,value_eTotal,value_dayIncome,value_totalIncome)
+     values (#{stationId,jdbcType=VARCHAR},#{userName},#{stationName},#{station_pic},#{currentPower},#{capacity},#{value_eDayTotal},#{value_eTotal},#{value_dayIncome},#{value_totalIncome})
+     
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.GdSninfo" >
+    insert into tb_gd_sninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="stationid != null" >
+        stationId,
+      </if>
+      <if test="stationname != null" >
+        stationName,
+      </if>
+      <if test="stationPic != null" >
+        station_pic,
+      </if>
+      <if test="currentpower != null" >
+        currentPower,
+      </if>
+      <if test="capacity != null" >
+        capacity,
+      </if>
+      <if test="valueEdaytotal != null" >
+        value_eDayTotal,
+      </if>
+      <if test="valueEtotal != null" >
+        value_eTotal,
+      </if>
+      <if test="valueDayincome != null" >
+        value_dayIncome,
+      </if>
+      <if test="valueTotalincome != null" >
+        value_totalIncome,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPic != null" >
+        #{stationPic,jdbcType=VARCHAR},
+      </if>
+      <if test="currentpower != null" >
+        #{currentpower,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="valueEdaytotal != null" >
+        #{valueEdaytotal,jdbcType=VARCHAR},
+      </if>
+      <if test="valueEtotal != null" >
+        #{valueEtotal,jdbcType=VARCHAR},
+      </if>
+      <if test="valueDayincome != null" >
+        #{valueDayincome,jdbcType=VARCHAR},
+      </if>
+      <if test="valueTotalincome != null" >
+        #{valueTotalincome,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.GdSninfo" >
+    update tb_gd_sninfo
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        stationId = #{stationid,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        stationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPic != null" >
+        station_pic = #{stationPic,jdbcType=VARCHAR},
+      </if>
+      <if test="currentpower != null" >
+        currentPower = #{currentpower,jdbcType=VARCHAR},
+      </if>
+      <if test="capacity != null" >
+        capacity = #{capacity,jdbcType=VARCHAR},
+      </if>
+      <if test="valueEdaytotal != null" >
+        value_eDayTotal = #{valueEdaytotal,jdbcType=VARCHAR},
+      </if>
+      <if test="valueEtotal != null" >
+        value_eTotal = #{valueEtotal,jdbcType=VARCHAR},
+      </if>
+      <if test="valueDayincome != null" >
+        value_dayIncome = #{valueDayincome,jdbcType=VARCHAR},
+      </if>
+      <if test="valueTotalincome != null" >
+        value_totalIncome = #{valueTotalincome,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.GdSninfo" >
+    update tb_gd_sninfo
+    set userName = #{username,jdbcType=VARCHAR},
+      stationId = #{stationid,jdbcType=VARCHAR},
+      stationName = #{stationname,jdbcType=VARCHAR},
+      station_pic = #{stationPic,jdbcType=VARCHAR},
+      currentPower = #{currentpower,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      value_eDayTotal = #{valueEdaytotal,jdbcType=VARCHAR},
+      value_eTotal = #{valueEtotal,jdbcType=VARCHAR},
+      value_dayIncome = #{valueDayincome,jdbcType=VARCHAR},
+      value_totalIncome = #{valueTotalincome,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByStationId" parameterType="com.monitor.pojo.GdSninfo" >
+    update tb_gd_sninfo
+    set userName = #{username,jdbcType=VARCHAR},
+      stationId = #{stationid,jdbcType=VARCHAR},
+      stationName = #{stationname,jdbcType=VARCHAR},
+      station_pic = #{stationPic,jdbcType=VARCHAR},
+      currentPower = #{currentpower,jdbcType=VARCHAR},
+      capacity = #{capacity,jdbcType=VARCHAR},
+      value_eDayTotal = #{valueEdaytotal,jdbcType=VARCHAR},
+      value_eTotal = #{valueEtotal,jdbcType=VARCHAR},
+      value_dayIncome = #{valueDayincome,jdbcType=VARCHAR},
+      value_totalIncome = #{valueTotalincome,jdbcType=VARCHAR}
+    where stationid = #{stationid,jdbcType=VARCHAR}
+  </update>
+</mapper>

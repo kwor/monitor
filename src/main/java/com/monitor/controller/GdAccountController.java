@@ -90,9 +90,14 @@ public class GdAccountController {
 				 //JsonElement转换为JavaBean对象
 				 field = gson.fromJson(e, GdStationField.class);	
 				 //fza 2017.10.27  
-				 GdSninfo snInfo = new GdSninfo(field.getUserName(),field.getStationId(), field.getStationName(), field.getStation_pic(),
-						 field.getCurrentPower(), field.getCapacity(), field.getValue_eDayTotal(), field.getValue_eTotal(), field.getValue_dayIncome(),
+				 GdSninfo snInfo = new GdSninfo(account,field.getStationId(), field.getStationName(), field.getStation_pic(),
+						 field.getCurrentPower().substring(0,field.getCurrentPower().length()-2), 
+						 field.getCapacity().substring(0,field.getCapacity().length()-2), 
+						 field.getValue_eDayTotal().substring(0,field.getValue_eDayTotal().length()-3), 
+						 field.getValue_eTotal().substring(0,field.getValue_eTotal().length()-3), 					 
+						 field.getValue_dayIncome(),
 						 field.getValue_totalIncome());
+                 System.out.println("UserName="+ field.getUserName());
 				 //如果tb_gd_sninfo有数据
 				 if(stationIdList.size() > 0)
 				 {

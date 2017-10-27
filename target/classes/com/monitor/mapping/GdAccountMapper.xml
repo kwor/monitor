@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.GdAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.GdAccount" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="stationname" property="stationname" jdbcType="VARCHAR" />
+    <result column="creationdate" property="creationdate" jdbcType="VARCHAR" />
+    <result column="creationdate2" property="creationdate2" jdbcType="VARCHAR" />
+    <result column="sn" property="sn" jdbcType="VARCHAR" />
+    <result column="stationid" property="stationid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account, stationname, creationdate, creationdate2, sn, stationid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_gd_account
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 查询所有 -->
+    <select id="selectByGdAccount" resultMap="BaseResultMap" parameterType="com.monitor.pojo.GdAccount" >
+    select distinct account
+    
+    from tb_gd_account limit #{num1},#{num2}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_gd_account
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.monitor.pojo.GdAccount" >
+    insert into tb_gd_account (id, account, stationname, 
+      creationdate, creationdate2, sn, 
+      stationid)
+    values (#{id,jdbcType=INTEGER}, #{account,jdbcType=VARCHAR}, #{stationname,jdbcType=VARCHAR}, 
+      #{creationdate,jdbcType=VARCHAR}, #{creationdate2,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR}, 
+      #{stationid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.GdAccount" >
+    insert into tb_gd_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="stationname != null" >
+        stationname,
+      </if>
+      <if test="creationdate != null" >
+        creationdate,
+      </if>
+      <if test="creationdate2 != null" >
+        creationdate2,
+      </if>
+      <if test="sn != null" >
+        sn,
+      </if>
+      <if test="stationid != null" >
+        stationid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate2 != null" >
+        #{creationdate2,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.GdAccount" >
+    update tb_gd_account
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        stationname = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        creationdate = #{creationdate,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate2 != null" >
+        creationdate2 = #{creationdate2,jdbcType=VARCHAR},
+      </if>
+      <if test="sn != null" >
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="stationid != null" >
+        stationid = #{stationid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.GdAccount" >
+    update tb_gd_account
+    set account = #{account,jdbcType=VARCHAR},
+      stationname = #{stationname,jdbcType=VARCHAR},
+      creationdate = #{creationdate,jdbcType=VARCHAR},
+      creationdate2 = #{creationdate2,jdbcType=VARCHAR},
+      sn = #{sn,jdbcType=VARCHAR},
+      stationid = #{stationid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
