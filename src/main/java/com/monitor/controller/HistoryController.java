@@ -1,5 +1,6 @@
 package com.monitor.controller;
 
+import java.awt.geom.Ellipse2D;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,6 +30,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONArray;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.monitor.dao.GdStationField;
 import com.monitor.dao.XmStationField;
 import com.monitor.pojo.History;
@@ -84,15 +87,18 @@ public class HistoryController {
    
     public String getinfo(HttpServletRequest request) {
     	Gson gson = new Gson();
+    	JsonParser parser = new JsonParser();
     	//获取字节流长度
     	int totalBytes = request.getContentLength();
     	if(totalBytes>0) {
     		try {
-    			
-    			String str=new RequestJson().getRequestJsonString(request);
+    			String str=null;
+    			str=new RequestJson().getRequestJsonString(request);
     			System.out.println(str);
     			XmStationField field = null;
-    			field = gson.fromJson(str, XmStationField.class);
+    			 
+    			JsonElement jsonstr=parser.parse(str);
+    			field = gson.fromJson(jsonstr, XmStationField.class);
     			System.out.println("xxxx"+field.getX1bd());
     			System.out.println("aaaa"+field.getZa());
     			
@@ -112,8 +118,7 @@ public class HistoryController {
     		} catch (IOException e2) {
     			// TODO Auto-generated catch block
     			e2.printStackTrace();
-    		}
-    	 
+    		} 
     	}
 	  
 
