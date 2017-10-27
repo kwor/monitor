@@ -98,9 +98,7 @@ public class HistoryController {
     			gd.setInventersn(field.getZa());
     			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
     			gd.setPower("0");
-    			 
     			gd.setStatus("Offline");
-    			
     			gd.setEday(field.getX1bd());
     			gd.setEtotal(field.getX1bc());
     			gd.setErrormsg(field.getX1fs());
