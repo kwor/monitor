@@ -25,7 +25,7 @@ import com.monitor.util.RequestJson;
 @RequestMapping("/")
 public class XmController {
 	@Resource
-	private ITbInfoService gdInfoService;
+	private ITbInfoService tbInfoService;
  //小麦平台数据获取
     @RequestMapping(value="/getinfo",method= {RequestMethod.POST},consumes = "application/json")
     public String getinfo(HttpServletRequest request) {
@@ -37,7 +37,7 @@ public class XmController {
     		try {
     			String str=null;
     			str=new RequestJson().getRequestJsonString(request);
-    			System.out.println(str);
+    			//System.out.println(str);
     			XmStationField field = null;
     			 
     			JsonElement jsonstr=parser.parse(str);
@@ -66,7 +66,7 @@ public class XmController {
     	    				gd.setErrormsg(field.getX1fs());
     	    			}
 
-    	    			gdInfoService.insertInfo(gd);
+    	    			tbInfoService.insertInfo(gd);
 
     			   }
     	    			

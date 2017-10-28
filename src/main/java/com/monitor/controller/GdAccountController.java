@@ -51,6 +51,14 @@ public class GdAccountController {
 	@Resource
 	private ITbInfoService gdErrorService;
 	@ResponseBody
+	//查询所有账户信息
+	@RequestMapping(value="allAccount",method= {RequestMethod.GET})
+	public  int getAllAccount() {
+		// TODO Auto-generated method stub
+		List<GdAccount> accountList = gdAccountService.selectAllAccount();
+		return accountList.size();
+	}
+	@ResponseBody
 	//根据账户查询所有信息
 	@RequestMapping(value="account/{num1}/{num2}",method= {RequestMethod.GET})
 	public List<GdAccount> selectByGdAccount(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2){		
@@ -72,10 +80,13 @@ public class GdAccountController {
 			String account = gdaccount.getAccount();
 		    //通过account获取stationId的地址
 		    String url = "http://www.goodwe-power.com/mobile/GetMyPowerStationByUser?userName="+account;
-		    HttpURLConnection connection = null;		 		 		 			
+		    //HttpURLConnection connection = null;	
+		    System.out.println("url="+url);
+			
 		    try {
 				 //通过get方式获取地址并获取stationId
 				 String jsoninfo=new HttpTool().sendPost("", url);
+				 System.out.println("jsoninfo="+jsoninfo);
 				 //获取出Json格式，进行解析
 				 JsonElement el = parser.parse(jsoninfo);			 
 				 JsonArray jsonArray = null;
@@ -84,15 +95,21 @@ public class GdAccountController {
 			 }			 
 			 //遍历JsonArray对象
 			 GdStationField field = null;
+			
 			 Iterator it = jsonArray.iterator();
 			 while(it.hasNext()){
 				 JsonElement e = (JsonElement)it.next();			 			
 				 //JsonElement转换为JavaBean对象
 				 field = gson.fromJson(e, GdStationField.class);	
 				 //fza 2017.10.27  
-				 GdSninfo snInfo = new GdSninfo(field.getUserName(),field.getStationId(), field.getStationName(), field.getStation_pic(),
-						 field.getCurrentPower(), field.getCapacity(), field.getValue_eDayTotal(), field.getValue_eTotal(), field.getValue_dayIncome(),
+				 GdSninfo snInfo = new GdSninfo(account,field.getStationId(), field.getStationName(), field.getStation_pic(),
+						 field.getCurrentPower().substring(0,field.getCurrentPower().length()-2), 
+						 field.getCapacity().substring(0,field.getCapacity().length()-2), 
+						 field.getValue_eDayTotal().substring(0,field.getValue_eDayTotal().length()-3), 
+						 field.getValue_eTotal().substring(0,field.getValue_eTotal().length()-3), 					 
+						 field.getValue_dayIncome(),
 						 field.getValue_totalIncome());
+
 				 //如果tb_gd_sninfo有数据
 				 if(stationIdList.size() > 0)
 				 {

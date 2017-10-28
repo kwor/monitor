@@ -29,7 +29,7 @@ public class GdSninfoService implements IGdSninfoService{
 		return gdSninfoMapper.selectStationid();
 	}
 	
-	////更新tb_gd_sninfo
+	////更新tb_sj_sninfo
 	public int updateByStationId(GdSninfo record)
 	{
 		return gdSninfoMapper.updateByStationId(record);

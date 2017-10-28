@@ -20,7 +20,11 @@ public class GdAccountService implements IGdAccountService{
 		
 		return gdAccountMapper.selectByGdAccount(num1,num2);
 	}
-
+	//查询所有
+	public List<GdAccount> selectAllAccount()
+    {
+    	return gdAccountMapper.selectAllAccount();
+    }
 	@Override
 	public List<GdAccount> getByGdAccount(int num1, int num2) {
 		// TODO Auto-generated method stub

@@ -2,15 +2,25 @@ package com.monitor.service.impl;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
+import com.monitor.dao.SjPlantMapper;
+import com.monitor.dao.SjSninfoMapper;
+import com.monitor.pojo.SjPlantinfo;
+import com.monitor.pojo.SjSninfo;
 import com.monitor.service.ISjService;
 import com.monitor.util.HttpTool;
-@Service("SjAccountService")
+@Service("SjService")
 public class SjService implements ISjService {
 
-	@SuppressWarnings("static-access")
-	@Override
+	@Resource
+	private SjPlantMapper sjPlantMapper;
+	@Resource
+	private SjSninfoMapper sjSninfoMapper;
+	
+ 	@Override
 	public String getToken() {
 		// TODO Auto-generated method stub
 		String surl="https://api.saj-solar.com/accessToken?client_id=15426&client_secret=2E7D9390-D68C-436D-A632-798422781066&grant_type=2E7D9390-D68C-436D-A632-798422781066&scope=read,write";
@@ -22,6 +32,19 @@ public class SjService implements ISjService {
 			e.printStackTrace();
 		}
 		return jsoninfo;
+	}
+
+	@Override
+	public int insert(SjPlantinfo record) {
+		// TODO Auto-generated method stub
+		
+		return sjPlantMapper.insert(record);
+	}
+
+	@Override
+	public int insert(SjSninfo record) {
+		// TODO Auto-generated method stub
+		return sjSninfoMapper.insert(record);
 	}
 
 }
