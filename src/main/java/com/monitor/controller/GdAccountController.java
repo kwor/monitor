@@ -97,7 +97,7 @@ public class GdAccountController {
 						 field.getValue_eTotal().substring(0,field.getValue_eTotal().length()-3), 					 
 						 field.getValue_dayIncome(),
 						 field.getValue_totalIncome());
-                 System.out.println("UserName="+ field.getUserName());
+
 				 //如果tb_gd_sninfo有数据
 				 if(stationIdList.size() > 0)
 				 {
