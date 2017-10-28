@@ -21,12 +21,17 @@
   </select>
   
   <!-- 查询所有 -->
+    <select id="selectAllAccount" resultMap="BaseResultMap" parameterType="com.monitor.pojo.GdAccount" >
+    select distinct account
+    
+    from tb_gd_account 
+  </select>
+  <!-- 查询所有固定条数 -->
     <select id="selectByGdAccount" resultMap="BaseResultMap" parameterType="com.monitor.pojo.GdAccount" >
     select distinct account
     
     from tb_gd_account limit #{num1},#{num2}
   </select>
-  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_gd_account
     where id = #{id,jdbcType=INTEGER}

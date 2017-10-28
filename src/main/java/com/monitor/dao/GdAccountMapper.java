@@ -19,6 +19,8 @@ public interface GdAccountMapper {
 
     int updateByPrimaryKey(GdAccount record);
     
-    //查询所有
+    //查询条数
     List<GdAccount> selectByGdAccount(@Param("num1")int sum1,@Param("num2")int num2);
+    //查询所有
+    List<GdAccount> selectAllAccount();
 }
