@@ -35,9 +35,9 @@
   </delete>
   
   <!-- 根据stationid插入所有数据 -->
-  <insert id="insertError" parameterType="com.monitor.pojo.TbInfo" >
+  <insert id="insertInfo" parameterType="com.monitor.pojo.TbInfo" >
     insert into tb_info (stationId, inventersn, idesc, power, status, eday, etotal, errormsg, addtime)
-    values (#{stationid,jdbcType=VARCHAR}, #{inventersn,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{eday,jdbcType=VARCHAR}, #{etotal,jdbcType=VARCHAR}, #{errormsg,jdbcType=VARCHAR} ,#{addtime,jdbcType=VARCHAR})
+    values (#{stationid,jdbcType=VARCHAR}, #{inventersn,jdbcType=VARCHAR}, #{idesc,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{eday,jdbcType=VARCHAR}, #{etotal,jdbcType=VARCHAR}, #{errormsg,jdbcType=VARCHAR} ,#{addtime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.monitor.pojo.TbInfo" >
     insert into tb_gd_error

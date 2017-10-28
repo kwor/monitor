@@ -20,7 +20,7 @@ public interface TbInfoMapper {
     int updateByPrimaryKey(TbInfo record);
     
     //根据stationid插入所有数据
-    int insertError(TbInfo record);
+    int insertInfo(TbInfo record);
     
     //根据inventersn查询出所有数据
     List<TbInfo> selectByInventersn(String inventersn);

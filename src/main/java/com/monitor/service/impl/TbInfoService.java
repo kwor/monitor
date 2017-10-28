@@ -15,9 +15,9 @@ public class TbInfoService implements ITbInfoService {
 	@Resource
 	public TbInfoMapper tbInfoMapper;
 	//根据stationid插入所有数据
-	public int insertError(TbInfo gd) {
+	public int insertInfo(TbInfo gd) {
 		
-		return tbInfoMapper.insertError(gd);
+		return tbInfoMapper.insertInfo(gd);
 	}
 	
 	//根据inventersn查询出所有信息
