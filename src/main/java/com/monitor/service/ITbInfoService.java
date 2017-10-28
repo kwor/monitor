@@ -7,7 +7,7 @@ import com.monitor.pojo.TbInfo;
 public interface ITbInfoService {
 	
 	//根据stationid插入所有数据
-	public int insertError(TbInfo gd);
+	public int insertInfo(TbInfo gd);
 	
 	//根据inventersn查询出所有信息
 	public List<TbInfo> selectByInventersn(String inventersn);

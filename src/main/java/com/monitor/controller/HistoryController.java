@@ -118,13 +118,13 @@ public class HistoryController {
     	    			gd.setStationid(field.getG());
     	    			gd.setInventersn(field.getZa());
     	    			gd.setIdesc("小麦逆变器，此处setInventersn=采集器sn");
-    	    			gd.setPower("0W");
+    	    			gd.setPower("0");
     	    			gd.setStatus("Offline");
     	    			gd.setEday(field.getX1bd());
     	    			gd.setEtotal(field.getX1bc());
     	    			
     	    			//错误信息反馈
-    	    			if(field.getX1fs()=="") {
+    	    			if(field.getX1fs().equals("")) {
     	    				gd.setErrormsg("N/A");
     	    			}else {
     	    				gd.setErrormsg(field.getX1fs());
@@ -142,7 +142,7 @@ public class HistoryController {
     	    			System.out.println("gd.getId():"+gd.getId());
     	    			
     	    			
-    	    			gdErrorService.insertError(gd);
+    	    			gdErrorService.insertInfo(gd);
 
     				   
     				   

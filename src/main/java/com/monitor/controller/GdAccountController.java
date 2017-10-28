@@ -164,7 +164,7 @@ public class GdAccountController {
 			gd.setEtotal(field2.getEtotal());
 			gd.setErrormsg(field2.getErrormsg());
 			//错误信息反馈
-			gdErrorService.insertError(gd);
+			gdErrorService.insertInfo(gd);
 		   	
 		}
 		} catch (IOException e) {
