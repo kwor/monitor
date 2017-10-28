@@ -4,10 +4,10 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 
-import com.monitor.service.ISjAccountService;
+import com.monitor.service.ISjService;
 import com.monitor.util.HttpTool;
 @Service("SjAccountService")
-public class SjAccountService implements ISjAccountService {
+public class SjService implements ISjService {
 
 	@SuppressWarnings("static-access")
 	@Override
