@@ -1,6 +1,7 @@
 package com.monitor.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -45,6 +46,12 @@ public class SjService implements ISjService {
 	public int insert(SjSninfo record) {
 		// TODO Auto-generated method stub
 		return sjSninfoMapper.insert(record);
+	}
+
+	@Override
+	public List<SjPlantinfo> selectTop(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return sjPlantMapper.selectTop(num1, num2);
 	}
 
 }

@@ -23,6 +23,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
+import com.monitor.pojo.GdAccount;
 import com.monitor.pojo.GdStationError;
 import com.monitor.pojo.SjAlarmField;
 import com.monitor.pojo.SjPlantField;
@@ -111,10 +112,18 @@ public class SJController {
     	return "1";
     }
     @ResponseBody
-    @RequestMapping(value="/getplantdata/{plant_id}",method= {RequestMethod.GET})
-    public String selectplantdata(HttpServletRequest request,@PathVariable(value="plant_id")String plant_id) {
+    @RequestMapping(value="/getplantdata/{num1}/{num2}",method= {RequestMethod.GET})
+    public String selectplantdata(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2) {
     	//String access_token=sjAccountService.getToken();//这里的返回结果需要解析
     	String access_token="9be9eb38dca04661bfb731a0de8f6b88";
+    	
+    	List<SjPlantinfo> plantlist=sjService.selectTop(num1, num2);
+    	Iterator list = plantlist.iterator();
+        
+    	// 循环账户列表
+    	while (list.hasNext()) {
+    		SjPlantinfo sjPlantinfo = (SjPlantinfo) list.next();
+    		String plant_id=sjPlantinfo.getPlantId();
      	String surl="http://api.saj-solar.com/device/list?page=1&perpage=100&plant_id="+plant_id+"&access_token="+access_token;
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
@@ -157,10 +166,7 @@ public class SJController {
 				System.out.println(rs.get(0).getAlarm_code());
 				System.out.println(rs.get(0).getStart_time());
 		     	*/
-		     	
-		     	
-		     	
-				
+
 				//插入sn数据到库
 				SjSninfo sj=new SjSninfo();
 				sj.setDeviceId(field.getDevice_id());
@@ -176,6 +182,7 @@ public class SJController {
 				sj.setType(field.getType());
 				sj.setTzone(field.getTZone());
 				sj.setUpdatadate(field.getUpdataDate());
+				
 				int res=sjService.insert(sj);
 				//*/
 				
@@ -208,7 +215,7 @@ public class SJController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
+    	}
     	
     	return "1";
     }
