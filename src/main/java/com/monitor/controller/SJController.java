@@ -138,35 +138,11 @@ public class SJController {
 		   if(devicesJson.isJsonArray()) {
 			   jsonArray2=devicesJson.getAsJsonArray();
 		   }
-		//    System.out.println(jsonArray2);
 		   
 		   Iterator it2=jsonArray2.iterator();
 		   while (it2.hasNext()) {
 				JsonElement e2 = (JsonElement) it2.next();
 				SjSninfoField field=gson.fromJson(e2, SjSninfoField.class);
-				
-				/*
-		     	String turl="http://api.saj-solar.com/device/inverter/alarm?device_id=10040688&page=1&perpage=100&access_token="+access_token;
-		     	
-		     	String tjsoninfo = new HttpTool().sendPost("", turl);
-		     	JsonElement el=parser.parse(tjsoninfo);
-		     	
-		     	JsonObject telement = el.getAsJsonObject();
-		     	
-				JsonObject tdataJson = telement.getAsJsonObject("data");
-				
-				JsonArray alarmsJson = tdataJson.getAsJsonArray("alarms");
-				 
-				
-				
-				//按list获取
-				List<SjAlarmField> rs=new ArrayList<SjAlarmField>();   
-		        Type type = new TypeToken<ArrayList<SjAlarmField>>() {}.getType();  
-		        rs=gson.fromJson(alarmsJson, type);  
-				System.out.println(rs.get(0).getAlarm_code());
-				System.out.println(rs.get(0).getStart_time());
-		     	*/
-
 				//插入sn数据到库
 				SjSninfo sj=new SjSninfo();
 				sj.setDeviceId(field.getDevice_id());
@@ -185,8 +161,6 @@ public class SJController {
 				
 				int res=sjService.insert(sj);
 				//*/
-				
-				
 				if(res>0) {
 					TbInfo gd=new TbInfo();
 					//获取当前时间戳
