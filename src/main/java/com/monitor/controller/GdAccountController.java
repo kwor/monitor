@@ -59,6 +59,16 @@ public class GdAccountController {
 		List<GdAccount> accountList = gdAccountService.selectAllAccount();
 		return accountList.size();
 	}
+	   @ResponseBody
+	//查询所有stationid条数信息
+		@RequestMapping(value="allStationid",method= {RequestMethod.GET})
+		public  int getAllStationid() {
+			// TODO Auto-generated method stub
+
+			List<String> stationList=gdSninfoService.selectStationid();
+			//System.out.println(stationList.toString());
+			return stationList.size();
+		}
 	
 	@ResponseBody
 	//根据账户查询所有信息
