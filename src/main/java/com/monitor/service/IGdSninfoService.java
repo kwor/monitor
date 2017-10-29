@@ -11,5 +11,6 @@ public interface IGdSninfoService {
      public int insertSn(GdSninfo record);
 	//查询stationid
 	public List<String> selectStationid();
+	public List<GdSninfo> selectStationidTop(int num1,int num2);
 	public int updateByStationId(GdSninfo record);
 }

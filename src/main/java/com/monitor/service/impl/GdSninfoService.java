@@ -32,4 +32,10 @@ public class GdSninfoService implements IGdSninfoService{
 	{
 		return gdSninfoMapper.updateByStationId(record);
 	}
+
+	@Override
+	public List<GdSninfo> selectStationidTop(int num1, int num2) {
+		// TODO Auto-generated method stub
+		return gdSninfoMapper.selectStationidTop(num1, num2);
+	}
 }

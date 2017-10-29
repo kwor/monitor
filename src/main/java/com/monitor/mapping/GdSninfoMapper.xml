@@ -22,7 +22,10 @@
     value_eTotal, value_dayIncome, value_totalIncome
   </sql>
   <!-- 查询stationid -->
-  <select id="selectStationid" resultMap="map" parameterType="java.lang.String">
+  <select id="selectStationidTop" resultMap="BaseResultMap" parameterType="com.monitor.pojo.GdSninfo">
+  	select stationid from tb_gd_sninfo limit #{num1},#{num2}
+  </select>
+   <select id="selectStationid" resultMap="map" parameterType="java.lang.String">
   	select stationid from tb_gd_sninfo 
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

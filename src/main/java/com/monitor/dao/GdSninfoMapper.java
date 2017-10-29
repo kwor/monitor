@@ -22,5 +22,7 @@ public interface GdSninfoMapper {
   
     //查询stationid
     List<String> selectStationid();
+    
+    List<GdSninfo> selectStationidTop(@Param("num1")int sum1,@Param("num2")int num2);
     int updateByStationId(GdSninfo record);
 }

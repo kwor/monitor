@@ -140,13 +140,19 @@ public class GdAccountController {
 		return null;
 	}	
 	@ResponseBody
-	@RequestMapping(value="insertInfo",method= {RequestMethod.GET})
-	public List<String> insertError() {
-		List<String> stationid=gdSninfoService.selectStationid();
-		Iterator stationid2=stationid.iterator();
+	@RequestMapping(value="insertInfo/{num1}/{num2}",method= {RequestMethod.GET})
+	public List<String> insertError(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2) {
+		//List<String> stationid=gdSninfoService.selectStationid();
+		
+		List<GdSninfo> stationidlist= gdSninfoService.selectStationidTop(num1, num2);		
+
+		
+		Iterator stationid2=stationidlist.iterator();
 		while (stationid2.hasNext()) {
-			String stationid3 = (String) stationid2.next();
-			
+			//String stationid3 = (String) stationid2.next();
+			GdSninfo gdstationid = (GdSninfo) stationid2.next();
+			//获取account表里的所有数据
+			String stationid3 = gdstationid.getStationid();
 		
 		JsonParser parser = new JsonParser();
 		Gson gson = new Gson();
