@@ -1,6 +1,7 @@
 package com.monitor.controller;
 
 import java.io.IOException;
+import java.net.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -58,18 +59,11 @@ public class GdAccountController {
 		List<GdAccount> accountList = gdAccountService.selectAllAccount();
 		return accountList.size();
 	}
-	@ResponseBody
-	//查询所有账户信息
-	@RequestMapping(value="allAccount",method= {RequestMethod.GET})
-	public  int getAllAccount() {
-		// TODO Auto-generated method stub
-		List<GdAccount> accountList = gdAccountService.selectAllAccount();
-		return accountList.size();
-	}
+	
 	@ResponseBody
 	//根据账户查询所有信息
 	@RequestMapping(value="account/{num1}/{num2}",method= {RequestMethod.GET})
-	public List<GdAccount> selectByGdAccount(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2){		
+	public List<GdAccount> selectByGdAccount(HttpServletRequest request,@PathVariable(value="num1")int num1,@PathVariable(value="num2")int num2)throws Exception{		
 		JsonParser parser = new JsonParser();  //创建json解析器
 		Gson gson = new Gson();
 		List<String> stationIdList = null;
@@ -87,14 +81,12 @@ public class GdAccountController {
 			//获取account表里的所有数据
 			String account = gdaccount.getAccount();
 		    //通过account获取stationId的地址
-		    String url = "http://www.goodwe-power.com/mobile/GetMyPowerStationByUser?userName="+account;
-		    //HttpURLConnection connection = null;	
-		    System.out.println("url="+url);
-			
+		    String url ="http://www.goodwe-power.com/mobile/GetMyPowerStationByUser?userName="+URLEncoder.encode(account, "UTF-8");
+
 		    try {
 				 //通过get方式获取地址并获取stationId
 				 String jsoninfo=new HttpTool().sendPost("", url);
-				 System.out.println("jsoninfo="+jsoninfo);
+
 				 //获取出Json格式，进行解析
 				 JsonElement el = parser.parse(jsoninfo);			 
 				 JsonArray jsonArray = null;
