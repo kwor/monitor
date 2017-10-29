@@ -16,9 +16,7 @@ public class GdSninfoService implements IGdSninfoService{
 	private GdSninfoMapper gdSninfoMapper;
 	
 	//把stationid插入数据库
-	public int insertSn(String stationId,String userName,String stationName,String station_pic,String currentPower,String capacity,String value_eDayTotal,String value_eTotal,String value_dayIncome,String value_totalIncome) {
-		return gdSninfoMapper.insertSn(stationId,userName,stationName,station_pic,currentPower,capacity,value_eDayTotal,value_eTotal,value_dayIncome,value_totalIncome);
-	}
+ 
     public int insertSn(GdSninfo record) 
     {
     	return gdSninfoMapper.insert(record);
@@ -29,7 +27,7 @@ public class GdSninfoService implements IGdSninfoService{
 		return gdSninfoMapper.selectStationid();
 	}
 	
-	////更新tb_gd_sninfo
+	////更新tb_sj_sninfo
 	public int updateByStationId(GdSninfo record)
 	{
 		return gdSninfoMapper.updateByStationId(record);

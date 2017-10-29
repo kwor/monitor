@@ -1,4 +1,4 @@
-package com.monitor.dao;
+package com.monitor.pojo;
 
 import javax.persistence.Column;
 

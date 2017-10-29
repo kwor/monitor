@@ -49,7 +49,15 @@ public class GdAccountController {
 	@Resource
 	private IGdSninfoService gdSninfoService;
 	@Resource
-	private ITbInfoService gdErrorService;
+	private ITbInfoService tbInfoService;
+	@ResponseBody
+	//查询所有账户信息
+	@RequestMapping(value="allAccount",method= {RequestMethod.GET})
+	public  int getAllAccount() {
+		// TODO Auto-generated method stub
+		List<GdAccount> accountList = gdAccountService.selectAllAccount();
+		return accountList.size();
+	}
 	@ResponseBody
 	//查询所有账户信息
 	@RequestMapping(value="allAccount",method= {RequestMethod.GET})
@@ -181,7 +189,7 @@ public class GdAccountController {
 			gd.setEtotal(field2.getEtotal());
 			gd.setErrormsg(field2.getErrormsg());
 			//错误信息反馈
-			gdErrorService.insertInfo(gd);
+			tbInfoService.insertInfo(gd);
 		   	
 		}
 		} catch (IOException e) {

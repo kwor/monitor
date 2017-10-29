@@ -19,10 +19,7 @@ public interface GdSninfoMapper {
 
     int updateByPrimaryKey(GdSninfo record);
     
-    //把stationid插入数据库
-    int insertSn(@Param("stationId")String stationId,@Param("userName")String userName,@Param("stationName")String stationName,@Param("station_pic")String station_pic,@Param("currentPower")String currentPower,@Param("capacity")String capacity,@Param("value_eDayTotal")String value_eDayTotal,@Param("value_eTotal")String value_eTotal,@Param("value_dayIncome")String value_dayIncome,@Param("value_totalIncome")String value_totalIncome);
-
-    
+  
     //查询stationid
     List<String> selectStationid();
     int updateByStationId(GdSninfo record);
