@@ -174,7 +174,7 @@ public class GdAccountController {
 			gd.setAddtime(nowTimeStamp);
 			gd.setStationid(stationid3);
 			gd.setInventersn(field2.getInventersn());
-			gd.setIdesc(field2.getIdesc());
+			gd.setIdesc("固德威逆变器");
 			gd.setPower(field2.getPower());
 			gd.setStatus(field2.getStatus());
 			gd.setEday(field2.getEday());
