@@ -54,4 +54,10 @@ public class SjService implements ISjService {
 		return sjPlantMapper.selectTop(num1, num2);
 	}
 
+	@Override
+	public List<SjPlantinfo> selectAll() {
+		// TODO Auto-generated method stub
+		return sjPlantMapper.selectAll();
+	}
+
 }

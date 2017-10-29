@@ -30,6 +30,10 @@
     from tb_sj_plant
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
+    select plant_id
+    from tb_sj_plant
+  </select>
     <select id="selectTop" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
     select distinct plant_id
     from tb_sj_plant limit #{num1},#{num2}

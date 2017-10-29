@@ -46,6 +46,16 @@ public class SJController {
 	@Resource
 	private ITbInfoService tbInfoService;
 	
+	@ResponseBody
+	//查询所有plant_id条数信息
+	@RequestMapping(value="allPlant",method= {RequestMethod.GET})
+			public  int getAllPlant() {
+				// TODO Auto-generated method stub
+		         List<SjPlantinfo> plantlist=sjService.selectAll();
+ 				//System.out.println(stationList.toString());
+				return plantlist.size();
+			}
+	   
     @ResponseBody
     @RequestMapping(value="/getplant/{page}",method= {RequestMethod.GET})
     public String selectplant(HttpServletRequest request,@PathVariable(value="page")int page) {
