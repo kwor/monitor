@@ -23,6 +23,7 @@ import com.google.gson.JsonParser;
 import com.monitor.pojo.GdAccount;
 import com.monitor.pojo.GdSninfo;
 import com.monitor.pojo.GdStationError;
+import com.monitor.pojo.SjPlantField;
 import com.monitor.pojo.SjPlantinfo;
 import com.monitor.pojo.SjSninfo;
 import com.monitor.pojo.SjSninfoField;
@@ -265,4 +266,86 @@ public class RunController {
 		thread.start();
 		return "1";
 	}
+
+	@ResponseBody
+	@RequestMapping(value = "/RunSj2", method = { RequestMethod.GET })
+	public String selectplant() {
+
+		// TODO Auto-generated method stub
+		final long timeInterval = 80000;
+		Runnable runnable = new Runnable() {
+			public void run() {
+				while (true) {
+					for (int j = 1; j < 100; j++) {
+						// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
+						// int page=1;
+						String access_token = "9be9eb38dca04661bfb731a0de8f6b88";
+						String surl = "http://api.saj-solar.com/plant/list?page=" + j + "&perpage=100&access_token="
+								+ access_token;
+
+						JsonParser parser = new JsonParser();
+						Gson gson = new Gson();
+
+						String jsoninfo;
+						try {
+							jsoninfo = new HttpTool().sendPost("", surl);
+
+							JsonElement el2 = parser.parse(jsoninfo);
+							// System.out.println(el2);
+							JsonObject element = el2.getAsJsonObject();
+
+							JsonObject dataJson = null;
+							JsonArray arrayJson = null;
+							if (element.isJsonObject()) {
+								dataJson = element.getAsJsonObject("data");
+								arrayJson = dataJson.getAsJsonArray("plants");
+							}
+							// System.out.println(arrayJson);
+							if (dataJson.isJsonArray()) {
+								arrayJson = dataJson.getAsJsonArray();
+							}
+							// System.out.println(jsonArray2);
+
+							GdStationError field2 = null;
+							Iterator it2 = arrayJson.iterator();
+							while (it2.hasNext()) {
+								JsonElement e2 = (JsonElement) it2.next();
+								SjPlantField field = gson.fromJson(e2, SjPlantField.class);
+
+								SjPlantinfo sj = new SjPlantinfo();
+								sj.setCity(field.getCity());
+								sj.setCountry(field.getCountry());
+								sj.setCreateDate(field.getCreate_date());
+								sj.setCurrentPower(field.getCurrent_power());
+								sj.setImageUrl(field.getImage_url());
+								sj.setInstaller(field.getInstaller());
+								sj.setLatitude(field.getLatitude());
+								sj.setName(field.getName());
+								sj.setOperator(field.getOperator_());
+								sj.setPeakPower(field.getPeak_power());
+								sj.setPlantId(field.getPlant_id());
+								sj.setStatus(field.getStatus());
+								sj.setTotalEnergy(field.getTotal_energy());
+								sj.setUserId(field.getUser_id());
+								sj.setLocale(field.getLocale());
+								sj.setLongitude(field.getLongitude());
+								sjService.insert(sj);
+								// System.out.println("field.getPlant_id():"+field.getPlant_id());
+
+							}
+							// */
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		};
+		Thread thread = new Thread(runnable);
+		thread.start();
+
+		return "1";
+	}
+
 }
