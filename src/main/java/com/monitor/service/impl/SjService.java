@@ -12,6 +12,7 @@ import com.monitor.dao.SjSninfoMapper;
 import com.monitor.pojo.SjPlantinfo;
 import com.monitor.pojo.SjSninfo;
 import com.monitor.service.ISjService;
+import com.monitor.util.GetRequest;
 import com.monitor.util.HttpTool;
 @Service("SjService")
 public class SjService implements ISjService {
@@ -24,14 +25,8 @@ public class SjService implements ISjService {
  	@Override
 	public String getToken() {
 		// TODO Auto-generated method stub
-		String surl="https://api.saj-solar.com/accessToken?client_id=15426&client_secret=2E7D9390-D68C-436D-A632-798422781066&grant_type=2E7D9390-D68C-436D-A632-798422781066&scope=read,write";
-		String jsoninfo = null;
-		try {
-			jsoninfo = new HttpTool().sendPost("", surl);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+ 		GetRequest gr=new GetRequest();
+ 		String jsoninfo=gr.getData();
 		return jsoninfo;
 	}
 
