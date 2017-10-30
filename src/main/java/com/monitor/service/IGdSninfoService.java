@@ -13,4 +13,10 @@ public interface IGdSninfoService {
 	public List<String> selectStationid();
 	public List<GdSninfo> selectStationidTop(int num1,int num2);
 	public int updateByStationId(GdSninfo record);
+	
+	
+	//根据账户查询所有信息
+	public List<GdAccount> getByGdAccount(int num1,int num2);
+	//查询所有
+    List<GdAccount> selectAllAccount();
 }

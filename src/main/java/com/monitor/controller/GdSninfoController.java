@@ -27,7 +27,7 @@ import com.monitor.pojo.GdSninfo;
 import com.monitor.pojo.GdStationError;
 import com.monitor.service.ITbInfoService;
 import com.monitor.service.IGdSninfoService;
-import com.monitor.service.impl.GdAccountService;
+import com.monitor.service.impl.GdSninfoService;
 import com.monitor.util.HttpTool;
 
 import java.io.FileNotFoundException;
@@ -43,32 +43,14 @@ import com.google.gson.JsonSyntaxException;
 
 @Controller
 @RequestMapping("/")
-public class GdAccountController {
+public class GdSninfoController {
 
 	@Resource
-	private GdAccountService gdAccountService;
+	private GdSninfoService gdAccountService;
 	@Resource
 	private IGdSninfoService gdSninfoService;
 	@Resource
 	private ITbInfoService tbInfoService;
-	@ResponseBody
-	//查询所有账户信息
-	@RequestMapping(value="allAccount",method= {RequestMethod.GET})
-	public  int getAllAccount() {
-		// TODO Auto-generated method stub
-		List<GdAccount> accountList = gdAccountService.selectAllAccount();
-		return accountList.size();
-	}
-	   @ResponseBody
-	//查询所有stationid条数信息
-		@RequestMapping(value="allStationid",method= {RequestMethod.GET})
-		public  int getAllStationid() {
-			// TODO Auto-generated method stub
-
-			List<String> stationList=gdSninfoService.selectStationid();
-			//System.out.println(stationList.toString());
-			return stationList.size();
-		}
 	
 	@ResponseBody
 	//根据账户查询所有信息

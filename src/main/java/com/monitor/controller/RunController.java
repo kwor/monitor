@@ -29,7 +29,7 @@ import com.monitor.pojo.SjSninfoField;
 import com.monitor.pojo.TbInfo;
 import com.monitor.service.IGdSninfoService;
 import com.monitor.service.ITbInfoService;
-import com.monitor.service.impl.GdAccountService;
+import com.monitor.service.impl.GdSninfoService;
 import com.monitor.service.impl.SjService;
 import com.monitor.util.HttpTool;
 import com.monitor.util.Intime;
@@ -38,7 +38,7 @@ import com.monitor.util.Intime;
 @RequestMapping("/")
 public class RunController {
 	@Resource
-	private GdAccountService gdAccountService;
+	private GdSninfoService gdAccountService;
 	@Resource
 	private IGdSninfoService gdSninfoService;
 	@Resource
