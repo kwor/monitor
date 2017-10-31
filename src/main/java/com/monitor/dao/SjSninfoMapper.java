@@ -1,5 +1,7 @@
 package com.monitor.dao;
 
+import java.util.List;
+
 import com.monitor.pojo.*;
 
 public interface SjSninfoMapper {
@@ -14,4 +16,9 @@ public interface SjSninfoMapper {
     int updateByPrimaryKeySelective(SjSninfo record);
 
     int updateByPrimaryKey(SjSninfo record);
+    //查询所有deviceId
+    List<SjSninfo> selectDeviceId();
+    
+    //根据device_id 更新记录
+    int updateByDeviceId(SjSninfo record);
 }

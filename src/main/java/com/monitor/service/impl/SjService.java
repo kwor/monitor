@@ -55,5 +55,13 @@ public class SjService implements ISjService {
 		// TODO Auto-generated method stub
 		return sjPlantMapper.selectAll();
 	}
+//查询plant的所有数据
+	public List<SjSninfo> selectDeviceId() {
+		// TODO Auto-generated method stub
+		return sjSninfoMapper.selectDeviceId();
+	}
+	public int updateByDeviceId(SjSninfo record) {
+		return sjSninfoMapper.updateByDeviceId(record);
+	}
 
 }

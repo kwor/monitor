@@ -199,9 +199,7 @@ public class RunController {
 	public String selectplantdata() {
 		// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
 		String access_token = jsoninfo;
-	//	System.out.println(access_token);
 		List<SjPlantinfo> plantlistt = sjService.selectAll();
-		// System.out.println(stationList.toString());
 		int num1 = plantlistt.size();
 
 		final long timeInterval = 1000;
@@ -210,12 +208,12 @@ public class RunController {
 
 				while (true) {
 					Boolean flag = Intime.isBelong();
-
+					//查询所有tb_sj_sninfo表中数据，用于稍后判断是插入还是更新
+					List<SjSninfo> sninfoList = sjService.selectDeviceId();
+					
 					if (flag) {
 						for (int j = 1; j < num1; j++) {
-							List<SjPlantinfo> plantlist = sjService.selectTop(j, 1);
-							
-							
+							List<SjPlantinfo> plantlist = sjService.selectTop(j, 1);							
 							Iterator list = plantlist.iterator();
 
 							// 循环账户列表
@@ -257,8 +255,25 @@ public class RunController {
 										sj.setType(field.getType());
 										sj.setTzone(field.getTZone());
 										sj.setUpdatadate(field.getUpdataDate());
-
-										int res = sjService.insert(sj);
+										
+										int res =0;
+										if(sninfoList.size() > 0)
+										{
+											//如果已经存在，更新
+											if(sninfoList.contains(field.getDevice_id()))
+											{
+												sjService.updateByDeviceId(sj);
+											}
+											else {
+												//不存在，插入
+												res = sjService.insert(sj);
+											}
+										}
+										//如果tb_sj_sninfo没有有数据，直接插入
+										else {
+											res = sjService.insert(sj);
+										}
+										 
 										// */
 										if (res > 0) {
 											TbInfo gd = new TbInfo();

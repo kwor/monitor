@@ -28,6 +28,10 @@
     from tb_sj_sninfo
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectDeviceId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select device_id
+    from tb_sj_sninfo
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tb_sj_sninfo
     where id = #{id,jdbcType=INTEGER}
@@ -209,5 +213,23 @@
       EToday = #{etoday,jdbcType=VARCHAR},
       EMonth = #{emonth,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByDeviceId" parameterType="com.monitor.pojo.SjSninfo" >
+    update tb_sj_sninfo
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      datalogger_sn = #{dataloggerSn,jdbcType=VARCHAR},
+      device_sn = #{deviceSn,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      SysPower = #{syspower,jdbcType=VARCHAR},
+      UpdataDate = #{updatadate,jdbcType=VARCHAR},
+      TZone = #{tzone,jdbcType=VARCHAR},
+      DType = #{dtype,jdbcType=VARCHAR},
+      ETotal = #{etotal,jdbcType=VARCHAR},
+      EToday = #{etoday,jdbcType=VARCHAR},
+      EMonth = #{emonth,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
   </update>
 </mapper>

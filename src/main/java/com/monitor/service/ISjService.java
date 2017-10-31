@@ -17,4 +17,6 @@ public interface ISjService {
 	 //根据账户查询所有信息
 	 List<SjPlantinfo> selectTop(int num1,int num2);
 	 List<SjPlantinfo> selectAll();
+	 
+	 List<SjSninfo> selectDeviceId();
 }
