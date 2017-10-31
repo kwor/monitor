@@ -242,4 +242,24 @@
       total_energy = #{totalEnergy,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <update id="updateByPlantId" parameterType="com.monitor.pojo.SjPlantinfo" >
+    update tb_sj_plant
+    set locale = #{locale,jdbcType=VARCHAR},
+      plant_id = #{plantId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      peak_power = #{peakPower,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      operator_ = #{operator,jdbcType=VARCHAR},
+      installer = #{installer,jdbcType=VARCHAR},
+      current_power = #{currentPower,jdbcType=VARCHAR},
+      total_energy = #{totalEnergy,jdbcType=VARCHAR}
+    where plant_id = #{plant_id,jdbcType=VARCHAR}
+  </update>
 </mapper>

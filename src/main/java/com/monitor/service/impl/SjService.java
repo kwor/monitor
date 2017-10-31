@@ -63,5 +63,8 @@ public class SjService implements ISjService {
 	public int updateByDeviceId(SjSninfo record) {
 		return sjSninfoMapper.updateByDeviceId(record);
 	}
+	public int updateByPlantId(SjPlantinfo record) {
+		return sjPlantMapper.updateByPlantId(record);
+	}
 
 }

@@ -22,5 +22,7 @@ public interface SjPlantMapper {
     List<SjPlantinfo> selectAll();
     //查询plant条数
     List<SjPlantinfo> selectTop(@Param("num1")int sum1,@Param("num2")int num2);
+    //更新
+    int updateByPlantId(SjPlantinfo record);
     
 }

@@ -19,4 +19,5 @@ public interface ISjService {
 	 List<SjPlantinfo> selectAll();
 	 
 	 List<SjSninfo> selectDeviceId();
+	 public int updateByDeviceId(SjSninfo record);
 }

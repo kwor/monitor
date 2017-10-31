@@ -320,6 +320,7 @@ public class RunController {
 		Runnable runnable = new Runnable() {
 			public void run() {
 				while (true) {
+					List<SjPlantinfo> sjPlantList = sjService.selectAll();
 					for (int j = 1; j < 100; j++) {
 						// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
 						// int page=1;
@@ -375,7 +376,21 @@ public class RunController {
 								sj.setUserId(field.getUser_id());
 								sj.setLocale(field.getLocale());
 								sj.setLongitude(field.getLongitude());
-								sjService.insert(sj);
+								
+								if(sjPlantList.size() > 0) {
+									//如果存在，更新
+									if (sjPlantList.contains(field.getPlant_id())) {
+										sjService.updateByPlantId(sj);
+									}
+									//如果不存在，插入
+									else {
+										sjService.insert(sj);
+									}
+								}
+								else {
+									sjService.insert(sj);
+								}
+								
 								// System.out.println("field.getPlant_id():"+field.getPlant_id());
 
 							}
