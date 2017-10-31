@@ -111,7 +111,6 @@ public class RunController {
 	@RequestMapping(value = "RunGd", method = { RequestMethod.GET })
 	public List<String> insertError(HttpServletRequest request) {
 		// List<String> stationid=gdSninfoService.selectStationid();
-
 		// run in a second
 		final long timeInterval = 1000;
 		Runnable runnable = new Runnable() {
@@ -171,7 +170,6 @@ public class RunController {
 										gd.setErrormsg(field2.getErrormsg());
 										// 错误信息反馈
 										tbInfoService.insertInfo(gd);
-
 									}
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -271,7 +269,7 @@ public class RunController {
 											gd.setInventersn(field.getDevice_sn());
 											gd.setIdesc("三晶逆变器");
 											gd.setPower("0");
-											gd.setStatus("Offline");
+											gd.setStatus("Online");
 											gd.setEday(field.getEToday());
 											gd.setEtotal(field.getETotal());
 
