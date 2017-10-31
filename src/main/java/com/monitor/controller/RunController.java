@@ -71,7 +71,6 @@ public class RunController {
 		JsonElement el2 = parser.parse(jsoninfo);
 		// System.out.println(el2);
 		JsonObject element = el2.getAsJsonObject();
-
 		JsonObject dataJson = null;
 		JsonPrimitive arrayJson = null;
 		if (element.isJsonObject()) {
@@ -328,7 +327,7 @@ public class RunController {
 						String surl = "http://api.saj-solar.com/plant/list?page=" + j + "&perpage=100&access_token="
 								+ access_token;
 
-					 	System.out.println(surl);
+					 //	System.out.println(surl);
 						
 						JsonParser parser = new JsonParser();
 						Gson gson = new Gson();
@@ -336,9 +335,9 @@ public class RunController {
 						String jsoninfo;
 						try {
 							jsoninfo =  HttpTool.sendPost("", surl);
-                             System.out.println(jsoninfo);
+                          //   System.out.println(jsoninfo);
 							JsonElement el2 = parser.parse(jsoninfo);
-							  System.out.println(el2);
+						//	  System.out.println(el2);
 							JsonObject element = el2.getAsJsonObject();
 
 							JsonObject dataJson = null;
