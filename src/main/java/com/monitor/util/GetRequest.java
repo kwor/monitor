@@ -11,6 +11,12 @@ import javax.net.ssl.SSLSession;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+
 public class GetRequest {
     private String url = "https://api.saj-solar.com/accessToken?client_id=15426&client_secret=2E7D9390-D68C-436D-A632-798422781066&grant_type=2E7D9390-D68C-436D-A632-798422781066&scope=read,write";
     
@@ -29,10 +35,11 @@ public class GetRequest {
     //为更好的演示，去掉了不相关的代码
     public String getData() {
     	
-    	String jsonStr=null;
+    	
         this.url = url;
         BufferedReader in = null;
         HttpURLConnection conn = null;
+        JsonPrimitive arrayJson = null;
         String result = "";
         try {//该部分必须在获取connection前调用
             trustAllHttpsCertificates();
@@ -53,8 +60,19 @@ public class GetRequest {
             while ((line = in.readLine()) != null) {
                 result += line;
             }
-            jsonStr=result;
-            System.out.println(result);
+            //此处直接解析得到token
+            JsonParser parser = new JsonParser();
+    		JsonElement el2 = parser.parse(result);
+    		// System.out.println(el2);
+    		JsonObject element = el2.getAsJsonObject();
+
+    		JsonObject dataJson = null;
+    		
+    		if (element.isJsonObject()) {
+    			dataJson = element.getAsJsonObject("data");
+    		}	
+    		arrayJson = dataJson.getAsJsonPrimitive("access_token");
+
         } catch (Exception e) {
             logger.error("发送 GET 请求出现异常！\t\n"+e.getMessage()+"\n");
         } finally {// 使用finally块来关闭输出流、输入流
@@ -66,8 +84,8 @@ public class GetRequest {
                 logger.error("关闭数据流出错了！\n"+ex.getMessage()+"\n");
             }
         }
-        // 获得相应结果result,可以直接处理......
-        return jsonStr;
+      
+        return arrayJson.toString();
     }
     static class miTM implements javax.net.ssl.TrustManager, javax.net.ssl.X509TrustManager {
         public java.security.cert.X509Certificate[] getAcceptedIssuers() {

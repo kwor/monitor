@@ -20,6 +20,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.monitor.pojo.GdAccount;
 import com.monitor.pojo.GdSninfo;
 import com.monitor.pojo.GdStationError;
@@ -47,16 +48,42 @@ public class RunController {
 	private ITbInfoService tbInfoService;
 	@Resource
 	private SjService sjService;
-
+	GetRequest gr=new GetRequest();
+	//String jsoninfo=gr.getData();
+	String jsoninfo="daf02649ba2b4d869782f962560d0762";
 	@ResponseBody
 	// 查询所有账户信息
 	@RequestMapping(value = "Test1", method = { RequestMethod.GET })
+	
+	
+	
 	public int Test1() {
 
+		//System.out.println(jsoninfo);
+		/*
+		//{"data":{"uid":15426,"scope":"read,write","token":"bearer","expires_in":604800,"refresh_token":"70a3ccfda17a434c9554fa5bb4bf244c","access_token":"6f036ed6b3854362ae9549735e00973e"},"error_code":0,"error_msg":""}
+		JsonParser parser = new JsonParser();
+		Gson gson = new Gson();
 		
-	//	System.out.println(s);
-		 
+		GetRequest gr=new GetRequest();
+		String jsoninfo=gr.getData();
+		
+		JsonElement el2 = parser.parse(jsoninfo);
+		// System.out.println(el2);
+		JsonObject element = el2.getAsJsonObject();
 
+		JsonObject dataJson = null;
+		JsonPrimitive arrayJson = null;
+		if (element.isJsonObject()) {
+			dataJson = element.getAsJsonObject("data");
+			arrayJson = dataJson.getAsJsonPrimitive("refresh_token");
+			
+		}
+		System.out.println(arrayJson);
+		
+		//*/
+		 
+/*
 		// TODO Auto-generated method stub
 		final long timeInterval = 1000;
 		Runnable runnable = new Runnable() {
@@ -75,7 +102,7 @@ public class RunController {
 		};
 		Thread thread = new Thread(runnable);
 		thread.start();
-
+//*/
 		return 1;
 
 	}
@@ -171,8 +198,8 @@ public class RunController {
 	@RequestMapping(value = "/RunSj", method = { RequestMethod.GET })
 	public String selectplantdata() {
 		// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
-		String access_token = "9be9eb38dca04661bfb731a0de8f6b88";
-
+		String access_token = jsoninfo;
+		System.out.println(access_token);
 		List<SjPlantinfo> plantlistt = sjService.selectAll();
 		// System.out.println(stationList.toString());
 		int num1 = plantlistt.size();
@@ -185,8 +212,10 @@ public class RunController {
 					Boolean flag = Intime.isBelong();
 
 					if (flag) {
-						for (int j = 0; j < num1; j++) {
+						for (int j = 1; j < num1; j++) {
 							List<SjPlantinfo> plantlist = sjService.selectTop(j, 1);
+							
+							
 							Iterator list = plantlist.iterator();
 
 							// 循环账户列表
@@ -281,17 +310,19 @@ public class RunController {
 					for (int j = 1; j < 100; j++) {
 						// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
 						// int page=1;
-						String access_token = "9be9eb38dca04661bfb731a0de8f6b88";
+						String access_token = jsoninfo;
 						String surl = "http://api.saj-solar.com/plant/list?page=" + j + "&perpage=100&access_token="
 								+ access_token;
 
+						System.out.println(surl);
+						
 						JsonParser parser = new JsonParser();
 						Gson gson = new Gson();
 
 						String jsoninfo;
 						try {
 							jsoninfo = new HttpTool().sendPost("", surl);
-
+System.out.println(jsoninfo);
 							JsonElement el2 = parser.parse(jsoninfo);
 							// System.out.println(el2);
 							JsonObject element = el2.getAsJsonObject();
