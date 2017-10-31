@@ -32,6 +32,7 @@
     delete from tb_sj_sninfo
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <!-- 把数据插入到info表里 -->
   <insert id="insert" parameterType="com.monitor.pojo.SjSninfo" >
     insert into tb_sj_sninfo (id, device_id, datalogger_sn, 
       device_sn, manufacturer, model, 

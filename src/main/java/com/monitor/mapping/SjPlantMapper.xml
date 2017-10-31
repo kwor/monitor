@@ -30,10 +30,12 @@
     from tb_sj_plant
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <!-- 查询plant的所有数据 -->
   <select id="selectAll" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
     select plant_id
     from tb_sj_plant
   </select>
+  <!-- 查询plant条数 -->
     <select id="selectTop" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
     select distinct plant_id
     from tb_sj_plant limit #{num1},#{num2}
@@ -42,6 +44,7 @@
     delete from tb_sj_plant
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <!-- 把数据插入到plant里 -->
   <insert id="insert" parameterType="com.monitor.pojo.SjPlantinfo" >
     insert into tb_sj_plant (id, locale, plant_id, 
       name, user_id, status, 
