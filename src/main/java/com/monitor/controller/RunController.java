@@ -50,7 +50,7 @@ public class RunController {
 	private SjService sjService;
 	GetRequest gr=new GetRequest();
 	//String jsoninfo=gr.getData();
-	String jsoninfo="daf02649ba2b4d869782f962560d0762";
+	String jsoninfo="93b235e197e24a73aa4311b4aecacfca";
 	@ResponseBody
 	// 查询所有账户信息
 	@RequestMapping(value = "Test1", method = { RequestMethod.GET })
@@ -328,7 +328,7 @@ public class RunController {
 						String surl = "http://api.saj-solar.com/plant/list?page=" + j + "&perpage=100&access_token="
 								+ access_token;
 
-					//	System.out.println(surl);
+					 	System.out.println(surl);
 						
 						JsonParser parser = new JsonParser();
 						Gson gson = new Gson();
@@ -336,9 +336,9 @@ public class RunController {
 						String jsoninfo;
 						try {
 							jsoninfo =  HttpTool.sendPost("", surl);
-                            //System.out.println(jsoninfo);
+                             System.out.println(jsoninfo);
 							JsonElement el2 = parser.parse(jsoninfo);
-							// System.out.println(el2);
+							  System.out.println(el2);
 							JsonObject element = el2.getAsJsonObject();
 
 							JsonObject dataJson = null;
