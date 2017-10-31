@@ -77,7 +77,7 @@ public class GdSninfoController {
 
 		    try {
 				 //通过get方式获取地址并获取stationId
-				 String jsoninfo=new HttpTool().sendPost("", url);
+				 String jsoninfo= HttpTool.sendPost("", url);
 
 				 //获取出Json格式，进行解析
 				 JsonElement el = parser.parse(jsoninfo);			 
@@ -152,7 +152,7 @@ public class GdSninfoController {
 		   String url2="http://www.goodwe-power.com/mobile/GetMyDeviceListById?stationId="+stationid3;
 		   String jsoninfo2;
 		try {
-			jsoninfo2 = new HttpTool().sendPost("", url2);
+			jsoninfo2 =  HttpTool.sendPost("", url2);
 		
 		   JsonElement el2=parser.parse(jsoninfo2);
 		   JsonArray jsonArray2=null;

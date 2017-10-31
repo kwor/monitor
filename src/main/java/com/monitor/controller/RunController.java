@@ -111,7 +111,6 @@ public class RunController {
 	@RequestMapping(value = "RunGd", method = { RequestMethod.GET })
 	public List<String> insertError(HttpServletRequest request) {
 		// List<String> stationid=gdSninfoService.selectStationid();
-
 		// run in a second
 		final long timeInterval = 1000;
 		Runnable runnable = new Runnable() {
@@ -143,7 +142,7 @@ public class RunController {
 										+ stationid3;
 								String jsoninfo2;
 								try {
-									jsoninfo2 = new HttpTool().sendPost("", url2);
+									jsoninfo2 =  HttpTool.sendPost("", url2);
 
 									JsonElement el2 = parser.parse(jsoninfo2);
 									JsonArray jsonArray2 = null;
@@ -171,7 +170,6 @@ public class RunController {
 										gd.setErrormsg(field2.getErrormsg());
 										// 错误信息反馈
 										tbInfoService.insertInfo(gd);
-
 									}
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -226,7 +224,7 @@ public class RunController {
 								Gson gson = new Gson();
 								String jsoninfo;
 								try {
-									jsoninfo = new HttpTool().sendPost("", surl);
+									jsoninfo =  HttpTool.sendPost("", surl);
 									JsonElement el2 = parser.parse(jsoninfo);
 									JsonObject element = el2.getAsJsonObject();
 									JsonObject dataJson = element.getAsJsonObject("data");
@@ -286,7 +284,7 @@ public class RunController {
 											gd.setInventersn(field.getDevice_sn());
 											gd.setIdesc("三晶逆变器");
 											gd.setPower("0");
-											gd.setStatus("Offline");
+											gd.setStatus("Online");
 											gd.setEday(field.getEToday());
 											gd.setEtotal(field.getETotal());
 
@@ -336,7 +334,7 @@ public class RunController {
 
 						String jsoninfo;
 						try {
-							jsoninfo = new HttpTool().sendPost("", surl);
+							jsoninfo =  HttpTool.sendPost("", surl);
                             //System.out.println(jsoninfo);
 							JsonElement el2 = parser.parse(jsoninfo);
 							// System.out.println(el2);

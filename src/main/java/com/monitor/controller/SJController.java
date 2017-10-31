@@ -60,7 +60,7 @@ public class SJController {
 		 
     	String jsoninfo;
     	try {
-			jsoninfo = new HttpTool().sendPost("", surl);
+			jsoninfo =  HttpTool.sendPost("", surl);
  			
 		   JsonElement el2=parser.parse(jsoninfo);
 		   //System.out.println(el2);
@@ -130,7 +130,7 @@ public class SJController {
 		Gson gson = new Gson();
     	String jsoninfo;
     	try {
-		   jsoninfo = new HttpTool().sendPost("", surl);
+		   jsoninfo =  HttpTool.sendPost("", surl);
 		   JsonElement el2=parser.parse(jsoninfo);
  		   JsonObject element = el2.getAsJsonObject();
 		   JsonObject dataJson = element.getAsJsonObject("data");
