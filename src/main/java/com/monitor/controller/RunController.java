@@ -142,7 +142,7 @@ public class RunController {
 										+ stationid3;
 								String jsoninfo2;
 								try {
-									jsoninfo2 = new HttpTool().sendPost("", url2);
+									jsoninfo2 =  HttpTool.sendPost("", url2);
 
 									JsonElement el2 = parser.parse(jsoninfo2);
 									JsonArray jsonArray2 = null;
@@ -226,7 +226,7 @@ public class RunController {
 								Gson gson = new Gson();
 								String jsoninfo;
 								try {
-									jsoninfo = new HttpTool().sendPost("", surl);
+									jsoninfo =  HttpTool.sendPost("", surl);
 									JsonElement el2 = parser.parse(jsoninfo);
 									JsonObject element = el2.getAsJsonObject();
 									JsonObject dataJson = element.getAsJsonObject("data");
@@ -319,7 +319,7 @@ public class RunController {
 
 						String jsoninfo;
 						try {
-							jsoninfo = new HttpTool().sendPost("", surl);
+							jsoninfo =  HttpTool.sendPost("", surl);
                             //System.out.println(jsoninfo);
 							JsonElement el2 = parser.parse(jsoninfo);
 							// System.out.println(el2);
