@@ -34,7 +34,7 @@ public class GetRequest {
     public String getData() {
     	
     	
-        this.url = url;
+        //this.url = url;
         BufferedReader in = null;
         HttpURLConnection conn = null;
         JsonPrimitive arrayJson = null;
