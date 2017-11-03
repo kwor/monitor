@@ -195,9 +195,9 @@ public class RunController {
 	@RequestMapping(value = "/RunSj", method = { RequestMethod.GET })
 	public String selectplantdata() {
 		// String access_token=sjAccountService.getToken();//这里的返回结果需要解析
-		String access_token = jsoninfo;
+		final String access_token = jsoninfo;
 		List<SjPlantinfo> plantlistt = sjService.selectAll();
-		int num1 = plantlistt.size();
+		final int num1 = plantlistt.size();
 
 		final long timeInterval = 1000;
 		Runnable runnable = new Runnable() {
