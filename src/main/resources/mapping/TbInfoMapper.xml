@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.TbInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.TbInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stationId" property="stationid" jdbcType="VARCHAR" />
+    <result column="inventersn" property="inventersn" jdbcType="VARCHAR" />
+    <result column="idesc" property="idesc" jdbcType="VARCHAR" />
+    <result column="power" property="power" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="eday" property="eday" jdbcType="VARCHAR" />
+    <result column="etotal" property="etotal" jdbcType="VARCHAR" />
+    <result column="errormsg" property="errormsg" jdbcType="VARCHAR" />
+    <result column="addtime" property="addtime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, stationId, inventersn, idesc, power, status, eday, etotal, errormsg ,addtime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_gd_error
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据inventersn查询出所有数据 -->
+  <select id="selectByInventersn" resultMap="BaseResultMap" parameterType="com.monitor.pojo.TbInfo" >
+  select * from tb_info where inventersn=#{inventersn}
+  </select>
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_gd_error
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <!-- 根据stationid插入所有数据 -->
+  <insert id="insertInfo" parameterType="com.monitor.pojo.TbInfo" >
+    insert into tb_info (stationId, inventersn, idesc, power, status, eday, etotal, errormsg, addtime)
+    values (#{stationid,jdbcType=VARCHAR}, #{inventersn,jdbcType=VARCHAR}, #{idesc,jdbcType=VARCHAR}, #{power,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{eday,jdbcType=VARCHAR}, #{etotal,jdbcType=VARCHAR}, #{errormsg,jdbcType=VARCHAR} ,#{addtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.TbInfo" >
+    insert into tb_gd_error
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationid != null" >
+        stationId,
+      </if>
+      <if test="inventersn != null" >
+        inventersn,
+      </if>
+      <if test="idesc != null" >
+        idesc,
+      </if>
+      <if test="power != null" >
+        power,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="eday != null" >
+        eday,
+      </if>
+      <if test="etotal != null" >
+        etotal,
+      </if>
+      <if test="errormsg != null" >
+        errormsg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationid != null" >
+        #{stationid,jdbcType=VARCHAR},
+      </if>
+      <if test="inventersn != null" >
+        #{inventersn,jdbcType=VARCHAR},
+      </if>
+      <if test="idesc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="eday != null" >
+        #{eday,jdbcType=VARCHAR},
+      </if>
+      <if test="etotal != null" >
+        #{etotal,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        #{errormsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.TbInfo" >
+    update tb_gd_error
+    <set >
+      <if test="stationid != null" >
+        stationId = #{stationid,jdbcType=VARCHAR},
+      </if>
+      <if test="inventersn != null" >
+        inventersn = #{inventersn,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        desc = #{idesc,jdbcType=VARCHAR},
+      </if>
+      <if test="power != null" >
+        power = #{power,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="eday != null" >
+        eday = #{eday,jdbcType=VARCHAR},
+      </if>
+      <if test="etotal != null" >
+        etotal = #{etotal,jdbcType=VARCHAR},
+      </if>
+      <if test="errormsg != null" >
+        errormsg = #{errormsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.TbInfo" >
+    update tb_gd_error
+    set stationId = #{stationid,jdbcType=VARCHAR},
+      inventersn = #{inventersn,jdbcType=VARCHAR},
+      idesc = #{idesc,jdbcType=VARCHAR},
+      power = #{power,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      eday = #{eday,jdbcType=VARCHAR},
+      etotal = #{etotal,jdbcType=VARCHAR},
+      errormsg = #{errormsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

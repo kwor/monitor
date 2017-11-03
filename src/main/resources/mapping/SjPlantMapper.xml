@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.SjPlantMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.SjPlantinfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="locale" property="locale" jdbcType="VARCHAR" />
+    <result column="plant_id" property="plantId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="peak_power" property="peakPower" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+    <result column="operator_" property="operator" jdbcType="VARCHAR" />
+    <result column="installer" property="installer" jdbcType="VARCHAR" />
+    <result column="current_power" property="currentPower" jdbcType="VARCHAR" />
+    <result column="total_energy" property="totalEnergy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, locale, plant_id, name, user_id, status, country, city, longitude, latitude, 
+    peak_power, create_date, image_url, operator_, installer, current_power, total_energy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sj_plant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <!-- 查询plant的所有数据 -->
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
+    select plant_id
+    from tb_sj_plant
+  </select>
+  <!-- 查询plant条数 -->
+    <select id="selectTop" resultMap="BaseResultMap" parameterType="com.monitor.pojo.SjPlantinfo" >
+    select distinct plant_id
+    from tb_sj_plant limit #{num1},#{num2}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sj_plant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <!-- 把数据插入到plant里 -->
+  <insert id="insert" parameterType="com.monitor.pojo.SjPlantinfo" >
+    insert into tb_sj_plant (id, locale, plant_id, 
+      name, user_id, status, 
+      country, city, longitude, 
+      latitude, peak_power, create_date, 
+      image_url, operator_, installer, 
+      current_power, total_energy)
+    values (#{id,jdbcType=INTEGER}, #{locale,jdbcType=VARCHAR}, #{plantId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{peakPower,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{imageUrl,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{installer,jdbcType=VARCHAR}, 
+      #{currentPower,jdbcType=VARCHAR}, #{totalEnergy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.SjPlantinfo" >
+    insert into tb_sj_plant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="locale != null" >
+        locale,
+      </if>
+      <if test="plantId != null" >
+        plant_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="peakPower != null" >
+        peak_power,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="imageUrl != null" >
+        image_url,
+      </if>
+      <if test="operator != null" >
+        operator_,
+      </if>
+      <if test="installer != null" >
+        installer,
+      </if>
+      <if test="currentPower != null" >
+        current_power,
+      </if>
+      <if test="totalEnergy != null" >
+        total_energy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="locale != null" >
+        #{locale,jdbcType=VARCHAR},
+      </if>
+      <if test="plantId != null" >
+        #{plantId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="peakPower != null" >
+        #{peakPower,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="installer != null" >
+        #{installer,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPower != null" >
+        #{currentPower,jdbcType=VARCHAR},
+      </if>
+      <if test="totalEnergy != null" >
+        #{totalEnergy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.SjPlantinfo" >
+    update tb_sj_plant
+    <set >
+      <if test="locale != null" >
+        locale = #{locale,jdbcType=VARCHAR},
+      </if>
+      <if test="plantId != null" >
+        plant_id = #{plantId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="peakPower != null" >
+        peak_power = #{peakPower,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null" >
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null" >
+        operator_ = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="installer != null" >
+        installer = #{installer,jdbcType=VARCHAR},
+      </if>
+      <if test="currentPower != null" >
+        current_power = #{currentPower,jdbcType=VARCHAR},
+      </if>
+      <if test="totalEnergy != null" >
+        total_energy = #{totalEnergy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.SjPlantinfo" >
+    update tb_sj_plant
+    set locale = #{locale,jdbcType=VARCHAR},
+      plant_id = #{plantId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      peak_power = #{peakPower,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      operator_ = #{operator,jdbcType=VARCHAR},
+      installer = #{installer,jdbcType=VARCHAR},
+      current_power = #{currentPower,jdbcType=VARCHAR},
+      total_energy = #{totalEnergy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPlantId" parameterType="com.monitor.pojo.SjPlantinfo" >
+    update tb_sj_plant
+    set locale = #{locale,jdbcType=VARCHAR},
+      plant_id = #{plantId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      peak_power = #{peakPower,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      operator_ = #{operator,jdbcType=VARCHAR},
+      installer = #{installer,jdbcType=VARCHAR},
+      current_power = #{currentPower,jdbcType=VARCHAR},
+      total_energy = #{totalEnergy,jdbcType=VARCHAR}
+    where plant_id = #{plant_id,jdbcType=VARCHAR}
+  </update>
+</mapper>

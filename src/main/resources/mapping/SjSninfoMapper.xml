@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.monitor.dao.SjSninfoMapper" >
+  <resultMap id="BaseResultMap" type="com.monitor.pojo.SjSninfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="datalogger_sn" property="dataloggerSn" jdbcType="VARCHAR" />
+    <result column="device_sn" property="deviceSn" jdbcType="VARCHAR" />
+    <result column="manufacturer" property="manufacturer" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="last_update_time" property="lastUpdateTime" jdbcType="VARCHAR" />
+    <result column="SysPower" property="syspower" jdbcType="VARCHAR" />
+    <result column="UpdataDate" property="updatadate" jdbcType="VARCHAR" />
+    <result column="TZone" property="tzone" jdbcType="VARCHAR" />
+    <result column="DType" property="dtype" jdbcType="VARCHAR" />
+    <result column="ETotal" property="etotal" jdbcType="VARCHAR" />
+    <result column="EToday" property="etoday" jdbcType="VARCHAR" />
+    <result column="EMonth" property="emonth" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, device_id, datalogger_sn, device_sn, manufacturer, model, type, last_update_time, 
+    SysPower, UpdataDate, TZone, DType, ETotal, EToday, EMonth
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sj_sninfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectDeviceId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select device_id
+    from tb_sj_sninfo
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sj_sninfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <!-- 把数据插入到info表里 -->
+  <insert id="insert" parameterType="com.monitor.pojo.SjSninfo" >
+    insert into tb_sj_sninfo (id, device_id, datalogger_sn, 
+      device_sn, manufacturer, model, 
+      type, last_update_time, SysPower, 
+      UpdataDate, TZone, DType, 
+      ETotal, EToday, EMonth
+      )
+    values (#{id,jdbcType=INTEGER}, #{deviceId,jdbcType=VARCHAR}, #{dataloggerSn,jdbcType=VARCHAR}, 
+      #{deviceSn,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=VARCHAR}, #{syspower,jdbcType=VARCHAR}, 
+      #{updatadate,jdbcType=VARCHAR}, #{tzone,jdbcType=VARCHAR}, #{dtype,jdbcType=VARCHAR}, 
+      #{etotal,jdbcType=VARCHAR}, #{etoday,jdbcType=VARCHAR}, #{emonth,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.monitor.pojo.SjSninfo" >
+    insert into tb_sj_sninfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="dataloggerSn != null" >
+        datalogger_sn,
+      </if>
+      <if test="deviceSn != null" >
+        device_sn,
+      </if>
+      <if test="manufacturer != null" >
+        manufacturer,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time,
+      </if>
+      <if test="syspower != null" >
+        SysPower,
+      </if>
+      <if test="updatadate != null" >
+        UpdataDate,
+      </if>
+      <if test="tzone != null" >
+        TZone,
+      </if>
+      <if test="dtype != null" >
+        DType,
+      </if>
+      <if test="etotal != null" >
+        ETotal,
+      </if>
+      <if test="etoday != null" >
+        EToday,
+      </if>
+      <if test="emonth != null" >
+        EMonth,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataloggerSn != null" >
+        #{dataloggerSn,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSn != null" >
+        #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null" >
+        #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="syspower != null" >
+        #{syspower,jdbcType=VARCHAR},
+      </if>
+      <if test="updatadate != null" >
+        #{updatadate,jdbcType=VARCHAR},
+      </if>
+      <if test="tzone != null" >
+        #{tzone,jdbcType=VARCHAR},
+      </if>
+      <if test="dtype != null" >
+        #{dtype,jdbcType=VARCHAR},
+      </if>
+      <if test="etotal != null" >
+        #{etotal,jdbcType=VARCHAR},
+      </if>
+      <if test="etoday != null" >
+        #{etoday,jdbcType=VARCHAR},
+      </if>
+      <if test="emonth != null" >
+        #{emonth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.monitor.pojo.SjSninfo" >
+    update tb_sj_sninfo
+    <set >
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataloggerSn != null" >
+        datalogger_sn = #{dataloggerSn,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceSn != null" >
+        device_sn = #{deviceSn,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturer != null" >
+        manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null" >
+        last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="syspower != null" >
+        SysPower = #{syspower,jdbcType=VARCHAR},
+      </if>
+      <if test="updatadate != null" >
+        UpdataDate = #{updatadate,jdbcType=VARCHAR},
+      </if>
+      <if test="tzone != null" >
+        TZone = #{tzone,jdbcType=VARCHAR},
+      </if>
+      <if test="dtype != null" >
+        DType = #{dtype,jdbcType=VARCHAR},
+      </if>
+      <if test="etotal != null" >
+        ETotal = #{etotal,jdbcType=VARCHAR},
+      </if>
+      <if test="etoday != null" >
+        EToday = #{etoday,jdbcType=VARCHAR},
+      </if>
+      <if test="emonth != null" >
+        EMonth = #{emonth,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.monitor.pojo.SjSninfo" >
+    update tb_sj_sninfo
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      datalogger_sn = #{dataloggerSn,jdbcType=VARCHAR},
+      device_sn = #{deviceSn,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      SysPower = #{syspower,jdbcType=VARCHAR},
+      UpdataDate = #{updatadate,jdbcType=VARCHAR},
+      TZone = #{tzone,jdbcType=VARCHAR},
+      DType = #{dtype,jdbcType=VARCHAR},
+      ETotal = #{etotal,jdbcType=VARCHAR},
+      EToday = #{etoday,jdbcType=VARCHAR},
+      EMonth = #{emonth,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByDeviceId" parameterType="com.monitor.pojo.SjSninfo" >
+    update tb_sj_sninfo
+    set device_id = #{deviceId,jdbcType=VARCHAR},
+      datalogger_sn = #{dataloggerSn,jdbcType=VARCHAR},
+      device_sn = #{deviceSn,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=VARCHAR},
+      SysPower = #{syspower,jdbcType=VARCHAR},
+      UpdataDate = #{updatadate,jdbcType=VARCHAR},
+      TZone = #{tzone,jdbcType=VARCHAR},
+      DType = #{dtype,jdbcType=VARCHAR},
+      ETotal = #{etotal,jdbcType=VARCHAR},
+      EToday = #{etoday,jdbcType=VARCHAR},
+      EMonth = #{emonth,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>
